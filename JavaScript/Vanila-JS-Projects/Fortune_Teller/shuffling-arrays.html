@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shuffling Arrays</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 88%;
+    }
+  </style>
+</head>
+<body>
+  <!-- While languages like PHP and Ruby have built in methods for shuffling arrays, JavaScript does not.
+  The most commonly recommended solution for this is to use the Fisher-Yates (or Knuth) Shuffle algorithm:
+    The Fisher–Yates shuffle is an algorithm for generating a random permutation of a finite sequence—in plain terms, the algorithm shuffles the sequence. The algorithm effectively puts all the elements into a hat; it continually determines the next element by randomly drawing an element from the hat until no elements remain. The algorithm produces an unbiased permutation: every permutation is equally likely. The modern version of the algorithm is efficient: it takes time proportional to the number of items being shuffled and shuffles them in place.
+
+    The Fisher–Yates shuffle is named after Ronald Fisher and Frank Yates, who first described it, and is also known as the Knuth shuffle after Donald Knuth.
+  -->
+  <!-- Javascript Here -->
+  <script>
+    /**
+     * Randomly shuffle an array
+     * https://stackoverflow.com/a/2450976/1293256
+     * @param  {Array} array The array to shuffle
+     * @return {String}      The array
+     */
+    function shuffle(array) {
+      let currentIndex = array.length;
+      let temporaryValue;
+      let randomIndex;
+      // While there remain elements to shuffle ...
+      while (0 !== currentIndex) {
+        // Pick a remaining element ...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+
+    let lunch = ["sandwich", "soda", "chips", "cookie"];
+
+    // Shuffles the original lunch array
+    shuffle(lunch);
+    console.log(lunch);
+
+    // Create a new shuffled array from lunch (makes a copy)
+    let shuffledLunch = shuffle(Array.from(lunch));
+    console.log(shuffledLunch);
+  </script>
+</body>
+</html>
