@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting multiple elements in the DOM</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 88%;
+    }
+    .bg-red {
+      background-color: #CB070E;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <button data-snack>1</button>
+    <button class="bg-red">2</button>
+    <button>3</button>
+    <button data-snack>4</button>
+    <button class="bg-red" data-snack>5</button>
+  </p>
+
+  <!-- JavaScript Here -->
+  <script>
+    // Get all buttons
+    let buttons = document.querySelectorAll("button");
+    console.log(buttons);
+
+    // Get all elements with the .bg-red class
+    let elemsRed = document.querySelectorAll(".bg-red");
+    console.log(elemsRed);
+
+    // Get all elements with the [data-snack] attribute
+    let elemSnacks = document.querySelectorAll("[data-snack]");
+    console.log(elemSnacks);
+  </script>
+</body>
+</html>
