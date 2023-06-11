@@ -72,21 +72,23 @@
 
   <!-- JavaScript Here -->
   <script>
-    //
+    // Get DOM elements
     let tableOfContentsElement = document.querySelector("#table-of-contents");
     let headersElements = document.querySelectorAll("h2");
-    console.log(headersElements);
-    const fragment = new DocumentFragment();
-    headersElements.forEach(headerElement => {
-      let header = document.createElement("p");
-      let breaker = document.createElement("br");
-      header.textContent = headerElement.id;
-      header.appendChild(document.createTextNode(" "));
-      header.textContent += headerElement.innerText;
-      fragment.appendChild(header);
-      fragment.appendChild(breaker);
-    });
-    tableOfContentsElement.appendChild(fragment);
+    // console.log(headersElements);
+    let container = "";
+    
+    // Create new DOM elements
+    for (let headerElement of headersElements) {
+      container += `<li><a href="${headerElement.id}">${headerElement.textContent}</a></li>`;
+    }
+
+    if (container) {
+      tableOfContentsElement.innerHTML = `
+      <p><strong>Table of Contents</strong></p>
+      <ol>${container}</ol>`;
+    }
+    
   </script>
 </body>
 </html>
