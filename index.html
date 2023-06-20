@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Folliculometry Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="./app.js" defer></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folliculometry Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
-    <h1 class="title">Folliculometry Tracker</h1>
-    <main class="main" id="main">
-        <div class="wrapper">
-            <h2 class="h2">Your Menstrual Cycle Details</h2>
-            <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
-            <div class="cycles-form-group">
-                <!-- Choose number of cycles for calculation -->
-                <section class="cycles-form-num">
-                    <form action="" method="POST"class="cycles-num" id="cycles-num">
-                        <label for="cycles-num__select">Select number of cycles</label>
-                        <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select">
-                            <option value="" disabled selected>Choose number</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                        <button type="submit" class="cycles-num__submit" id="cycles-num__submit">Confirm</button>
-                    </form>
-                </section>
-                <!-- Input calendar dates to be used in the calculation -->
-                <section class="cycles-form-date">
-                    <form action="" method="POST" class="cycles-date" id="cycles-date">
-                        <ul class="cycles-date-list" id="cycles-date-list">
-                            <!-- 1st default -->
-                            <li class="cycles-date__item" id="cycles-date__item">
-                                <label for="flowstart1">Start date:</label>
-                                <input type="date" name="flowstart-1" class="cycles-date__input" id="cycles-date__input-1" data-date="flowstart">
-                            </li>
-                            <!-- 2nd default -->
-                            <li class="cycles-date__item" id="cycles-date__item">
-                                <label for="flowstart1">Start date:</label>
-                                <input type="date" name="flowstart-2" class="cycles-date__input" id="cycles-date__input-2" data-date="flowstart">
-                            </li>
-                        </ul>
-                        <button type="submit" class="cycles-date__submit" id="cycles-date__submit">Submit</button>
-                    </form>
-                </section>
-            </div>
-        </div>
-    </main>
+  <h1 class="title">Folliculometry Tracker</h1>
+  <main class="main" id="main">
+    <div class="wrapper">
+      <h2 class="h2">Your Menstrual Cycle Details</h2>
+      <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
+      <div class="cycles-form-group">
+        
+        <!-- Choose number of cycles for calculation -->
+        <section class="cycles-form-num">
+          <form action="" method="POST"class="cycles-num" id="cycles-num">
+            <label for="cycles-num__select">Select number of cycles</label>
+            <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select">
+              <option value="" disabled selected>Choose number</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+            <button type="submit" class="cycles-num__submit" id="cycles-num__submit">Confirm</button>
+          </form>
+        </section>
+
+        <!-- Input calendar dates to be used in the calculation -->
+        <section class="cycles-form-date">
+          <form action="" method="POST" class="cycles-date" id="cycles-date">
+            <ul class="cycles-date-list" id="cycles-date-list">
+              <!-- 1st default -->
+              <li class="cycles-date__item" id="cycles-date__item">
+                <label for="flowstart1">Start date:</label>
+                <input type="date" name="flowstart-1" class="cycles-date__input" id="cycles-date__input-1" data-date="flowstart">
+              </li>
+              <!-- 2nd default -->
+              <li class="cycles-date__item" id="cycles-date__item">
+                <label for="flowstart1">Start date:</label>
+                <input type="date" name="flowstart-2" class="cycles-date__input" id="cycles-date__input-2" data-date="flowstart">
+              </li>
+            </ul>
+            <button type="submit" class="cycles-date__submit" id="cycles-date__submit">Submit</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
