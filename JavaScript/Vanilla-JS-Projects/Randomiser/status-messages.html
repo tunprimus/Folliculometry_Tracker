@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Messages</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 30em;
+      width: 88%;
+    }
+
+    label,
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+    }
+
+    input,
+    textarea {
+      margin-bottom: 1em;
+    }
+
+    textarea {
+      min-height: 8em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Status Messages</h1>
+  <form>
+    <label for="current-pw">Current Password</label>
+    <input type="password" name="" id="current-pw">
+
+    <label for="new-pw">New Password</label>
+    <input type="password" name="" id="new-pw">
+
+    <p><button>Change Password</button></p>
+
+    <div id="notification" aria-live="polite"></div>
+  </form>
+  <!-- JavaScript Here -->
+  <script>
+    // Get the form
+    let form = document.querySelector("form");
+    form.addEventListener("submit", function(event) {
+      // Stop the form from reloading the page
+      event.preventDefault();
+
+      // Display a notification
+      let notification = document.querySelector("#notification");
+      notification.textContent = "Your password was updated!";
+    });
+  </script>
+</body>
+</html>
