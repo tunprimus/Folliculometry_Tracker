@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project: Create a List</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 88%;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /**
+		 * Remove animation
+		 */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Randomiser</h1>
+
+  <form action="" id="add-item">
+    <label for="item">Add an item to the list...</label>
+    <input type="text" id="item" name="item">
+    <button>Add item</button>
+  </form>
+
+  <ul id="items"></ul>
+
+  <!-- JavaScript Here -->
+  <script>
+    /* Let users add items to a list using a form. Each new item that the user enters should get added it to it as a list item (li). */
+
+    let formElement = document.querySelector('#add-item');
+    let listElement = document.querySelector('#items');
+
+    /**
+		 * Get an item to add to the list
+		 * @param {Event} ev The event object
+		 */
+    function addItem (ev) {
+      // Stop the form from reloading the page
+      ev.preventDefault();
+      let formElementData = new FormData(formElement);
+      let item = formElementData.get('item');
+
+      // If there is no item, return early
+      if (!item) {
+        return;
+      }
+
+      // Otherwise, add item to the list
+      addItemToList(item);
+
+      // Clear the form
+      formElement.reset();
+    }
+
+    /**
+		 * Add an item to the list
+		 * @param {String} item the item
+		 */
+    function addItemToList(item) {
+      // Create a list item
+      let li = document.createElement('li');
+      li.textContent = item;
+
+      // Add it to the list
+      listElement.append(li);
+    }
+
+    // Listen for submit changes on the form element
+    formElement.addEventListener('submit', addItem);
+  </script>
+</body>
+</html>
