@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converting a NodeList to an array</title>
+</head>
+<body>
+  <h1>Array.from()</h1>
+
+	<p>
+		<button>1</button>
+		<button>2</button>
+		<button>3</button>
+		<button>4</button>
+		<button>5</button>
+  </p>
+  <!-- JavaScript Here -->
+  <script>
+    let sandwiches = ["turkey", "tuna", "ham", "pb&j"];
+    let sandwichesCopy = Array.from(sandwiches);
+    console.log(sandwichesCopy);
+
+    // Get all the button elements
+    let buttons = document.querySelectorAll("button");
+
+    // Create an array of their text content
+    let buttonsArr = Array.from(buttons, function (button) {
+      return button.textContent;
+    });
+    console.log(buttonsArr);
+  </script>
+</body>
+</html>
