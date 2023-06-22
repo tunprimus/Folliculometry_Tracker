@@ -46,19 +46,31 @@
     // Get the form
     let form = document.querySelector("form");
 
-    
+    // Function to show status message
+    function showStatus() {
+      let notification = document.createElement("div");
+      notification.setAttribute("aria-live", "polite");
+
+      // Inject it into the DOM
+      form.append(notification);
+
+      // Add text after it is in the UI
+      setTimeout(function() {
+        notification.textContent = 'Your password was updated!';
+      }, 1);
+
+      // Remove it after 4 seconds
+      setTimeout(function() {
+        notification.remove();
+      }, 4000);
+    }
+
     form.addEventListener("submit", function(event) {
       // Stop the form from reloading the page
       event.preventDefault();
 
-      // Display a notification
-      let notification = document.querySelector("#notification");
-      notification.textContent = "Your password was updated!";
-
-      // Clear the notification after 4 seconds
-      setTimeout(function () {
-        notification.textContent = "";
-      }, 4000);
+      // Show a status message
+      showStatus();
     });
   </script>
 </body>
