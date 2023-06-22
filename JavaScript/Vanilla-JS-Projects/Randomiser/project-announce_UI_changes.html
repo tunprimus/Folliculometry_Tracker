@@ -41,7 +41,7 @@
     <button id="pick">Pick an Item</button>
   </p>
 
-  <div id="chosen"></div>
+  <div id="chosen" aria-live="polite"></div>
 
   <!-- JavaScript Here -->
   <script>
@@ -87,6 +87,7 @@
 
       // Add it to the list
       listElement.append(li);
+      showStatus(item);
     }
 
     /**
@@ -107,8 +108,6 @@
       // Otherwise, add item to the list
       addItemToList(item);
 
-      showStatus();
-
       // Clear the form
       formElement.reset();
     }
@@ -124,11 +123,11 @@
 
       // Display the first item in the chosen element
       chosenElement.textContent = items[0].textContent;
-      showStatus();
+      // showStatus();
     }
 
     // Function to show status message
-    function showStatus() {
+    function showStatus(item) {
       let notification = document.createElement("div");
       notification.setAttribute("aria-live", "polite");
 
@@ -137,13 +136,13 @@
 
       // Add text after it is in the UI
       setTimeout(function() {
-        notification.textContent = item.textContent || chosenElement.textContent;
+        notification.textContent = `${item} was added to the list.`;
       }, 1);
 
       // Remove it after 4 seconds
       setTimeout(function() {
         notification.remove();
-      }, 4000);
+      }, 2500);
     }
 
     // Listen for submit and click events on the form and button elements
