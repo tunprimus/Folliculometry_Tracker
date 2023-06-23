@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Web Storage API - window.localStorage</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Javascript Here -->
+  <script>
+    // Store data
+    let data = 'The data that I want to store for later.';
+    localStorage.setItem('myDataKey', data);
+
+    // Get data
+    let savedData = localStorage.getItem('myDataKey');
+    console.log(savedData);
+
+    // Remove data
+    localStorage.removeItem('myDataKey');
+
+    // Update and log again
+    savedData = localStorage.get('myDataKey');
+    console.log(savedData);
+  </script>
+</body>
+</html>
