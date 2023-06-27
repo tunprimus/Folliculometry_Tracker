@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catching Errors with Fetch</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Javascript Here -->
+  <script>
+    // This is treated as successful, even though the response is a 404
+    const URL = 'https://jsonplaceholder.typicode.com/posts';
+    const badURL = 'https://jsonplaceholder.typicode.com/postses';
+
+    fetch(badURL)
+      .then(function (response) {
+        // The API call was successful
+        // (wait, it was?)
+        console.log(response.status);
+        return response.json();
+        
+      }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+
+      }).catch(function (error) {
+        // There was an error
+        console.warn(error);
+      });
+
+    // This throws an error
+    fetch(badURL)
+      .then(function (response) {
+        // If the response is successful, get the JSON
+        if (response.ok) {
+          return response.json();
+        }
+        // Otherwise, throw an error
+        throw response.status;
+
+      }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+
+      }).catch(function (error) {
+        // There was an error
+        console.warn(error);
+      });
+    
+    // This also throws an error, but exposes the response body
+    fetch(badURL)
+      .then(function(response) {
+        // If the response is successful, get the JSON
+        if (response.ok) {
+          return response.json();
+        }
+        // Otherwise, throw an error
+        return response.json().then(function(json) {
+          throw json;
+        });
+        // For APIs that don’t return an error object, use response.text() instead of response.json()
+        return response.text().then(function (msg) {
+          throw msg;
+        });
+
+      }).then(function(data) {
+        // This is the JSON from our response
+        console.log(data);
+
+      }).catch(function(error) {
+        // There was an error
+        console.warn(error);
+      });
+  </script>
+</body>
+</html>
