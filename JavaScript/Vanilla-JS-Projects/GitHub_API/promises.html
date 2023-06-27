@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promises</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Javascript Here -->
+  <script>
+    // Create a Promise object
+    let sayHello = new Promise(function(resolve, reject) {
+      // In 5 seconds, resolve the Promise
+      // Pass along "Hi, universe" to any callback methods
+      setTimeout(function() {
+        resolve('Hi, universe!');
+      }, 5000);
+    });
+
+    // Handle the promise once it resolves
+    sayHello.then(function(msg) {
+      console.log(msg);
+    });
+  </script>
+</body>""
+</html>
