@@ -28,11 +28,13 @@
         console.log(response.status);
         return response.json();
         
-      }).then(function (data) {
+      })
+      .then(function (data) {
         // This is the JSON from our response
         console.log(data);
 
-      }).catch(function (error) {
+      })
+      .catch(function (error) {
         // There was an error
         console.warn(error);
       });
@@ -47,11 +49,13 @@
         // Otherwise, throw an error
         throw response.status;
 
-      }).then(function (data) {
+      })
+      .then(function (data) {
         // This is the JSON from our response
         console.log(data);
 
-      }).catch(function (error) {
+      })
+      .catch(function (error) {
         // There was an error
         console.warn(error);
       });
@@ -72,11 +76,13 @@
           throw msg;
         });
 
-      }).then(function(data) {
+      })
+      .then(function(data) {
         // This is the JSON from our response
         console.log(data);
 
-      }).catch(function(error) {
+      })
+      .catch(function(error) {
         // There was an error
         console.warn(error);
       });
