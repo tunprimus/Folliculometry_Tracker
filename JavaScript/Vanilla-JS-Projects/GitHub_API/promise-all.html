@@ -17,7 +17,30 @@
 
   <!-- Javascript Here -->
   <script>
-    
+    /* For example, the the JSONPlaceholder API has a /posts endpoint that returns a list of blog posts, and a /users endpoint that returns a list of post authors. We want to generate a list of blog posts from the /posts endpoint, and merge author data from the /users endpoint to generate a UI. */
+
+    const URL1 = 'https://jsonplaceholder.typicode.com/posts';
+    const URL2 = 'https://jsonplaceholder.typicode.com/users';
+
+    // Get data from multiple APIs while waiting for them to resolve
+    Promise.all([
+      fetch(URL1),
+      fetch(URL2),
+    ])
+      .then(function (responses) {
+        // Get a JSON object from each of the responses
+        return Promise.all(responses.map(function (response) {
+          return response.json();
+        }));
+      })
+      .then(function (data) {
+        // You would do something with both sets of data
+        console.log(data);
+      })
+      .catch(function (err) {
+        // If we got an error, log it
+        console.error(err);
+      });
   </script>
 </body>
 </html>
