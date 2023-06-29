@@ -82,6 +82,37 @@
         </div>`;
     }
 
+    /**
+		 * Render the UI
+		 * @param  {Object} data The GitHub data
+		 */
+		function render(data) {
+
+      // Get variables from the data
+      let [profile, repos] = data;
+
+      // Render the UI
+      github.innerHTML =
+        `<div class="gh-grid">
+          <div class="gh-avatar">
+            <p><img alt="" src="${profile.avatar_url}"></p>
+          </div>
+          <div class="gh-details">
+            <p>
+              <strong>${profile.name}</strong><br>
+              ${profile.location}<br>
+              <em><a href="${profile.url}">${profile.public_repos} public repos</a></em>
+            </p>
+            <ul>
+              ${repos.map(function (repo) {
+                return `<li><a href="${repo.html_url}">${repo.name}</a> - ${repo.stargazers_count} Stars</li>`;
+              }).join('')}
+            </ul>
+          </div>
+        </div>`;
+    }
+
+
     // Get data from multiple APIs while waiting for them to resolve
     Promise.all([
       fetch(URL1),
