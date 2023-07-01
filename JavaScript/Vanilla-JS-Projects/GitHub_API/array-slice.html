@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting a subsection of an array - Array.slice()</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Javascript Here -->
+  <script>
+    let sandwiches = ['turkey', 'tuna', 'chicken salad', 'italian', 'blt', 'grilled cheese'];
+
+    // Starting index
+    let fewerSandwiches = sandwiches.slice(2);
+    console.log(fewerSandwiches);
+
+    // Starting and ending indices
+    let fewerSandwiches2 = sandwiches.slice(2, 4);
+    console.log(fewerSandwiches2);
+
+    // copy an array
+    let sandwichesCopy = sandwiches.slice();
+    console.log(sandwichesCopy);
+  </script>
+</body>
+</html>
