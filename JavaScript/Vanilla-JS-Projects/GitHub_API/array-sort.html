@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting an array - Array.sort()</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Javascript Here -->
+  <script>
+    // Simple sorting
+    let wizards = ['Merlin', 42, 'Gandalf', 2022, 'Radagast'];
+
+    // Sort the wizard array
+    wizards.sort();
+    console.log(wizards);
+
+    // Complex sorting
+    // -1 0 1 for callback function
+    let trees = [
+				{
+					type: 'White pine',
+					pineCones: 4,
+				},
+				{
+					type: 'Blue spruce',
+					pineCones: 3,
+				},
+				{
+					type: 'Douglas fir',
+					pineCones: 7,
+				},
+      ];
+    
+    trees.sort(function(tree1, tree2) {
+      // If the tree1 has more pine cones, put it before tree2
+      if (tree1.pineCones > tree2.pineCones) {
+        return -1;
+      }
+      // Otherwise, put tree2 before tree1
+      return 1;
+    });
+
+    console.log(trees);
+  </script>
+</body>
+</html>
