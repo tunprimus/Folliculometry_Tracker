@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XSS Attacks - Injecting a Script</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      max-width: 40em;
+      width: 188%;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <!-- Javascript Here -->
+  <script>
+    // Add "Hello, World!"
+    let div = document.querySelector('#app');
+    div.innerHTML = '<h1>Hello, World!</h1>';
+
+    // This will not run
+    div.innerHTML += `<script>alert("XSS Attack");<\/script>`;
+    
+    // This WILL run
+    div.innerHTML += `<p><img src=x onerror="alert('One more XSS Attack')"></p>`;
+
+    // Links are also an attack vector
+    div.innerHTML += `<p><a href="javascript:alert('Another XSS Attack')">Click Me</a></p>`;
+  </script>
+</body>
+</html>
