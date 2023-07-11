@@ -19,7 +19,7 @@
         <!-- Choose number of cycles for calculation -->
         <section class="cycles-form-num">
           <h3 class="h3">Choose Number of Cycles</h3>
-          <form action="" method="POST"class="form-cycles-num" id="form-cycles-num" data-attribute="form-cycles-num">
+          <form action="" method="POST"class="form-cycles-num" id="form-cycles-num" data-attribute="form-cycles-num" aria-live="polite">
             <label for="cycles-num__select">Select number of cycles</label>
             <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select">
               <option value="" disabled selected>Choose number</option>
@@ -42,15 +42,15 @@
         <!-- Input calendar dates to be used in the calculation -->
         <section class="cycles-form-date">
           <h3 class="h3">Click the Start Dates on the Calendar</h3>
-          <form action="" method="POST" class="form-cycles-date" id="form-cycles-date" data-attribute="form-cycles-date">
+          <form action="" method="POST" class="form-cycles-date" id="form-cycles-date" data-attribute="form-cycles-date" aria-live="polite">
             <ul class="cycles-date-list" id="cycles-date-list">
               <!-- 1st default -->
-              <li class="cycles-date__item" id="cycles-date__item">
+              <li class="cycles-date__item" id="cycles-date__item-1">
                 <label for="cycles-date__input-1">Start date-1:</label>
                 <input type="date" name="flowstart-1" class="cycles-date__input" id="cycles-date__input-1" data-date="flowstart">
               </li>
               <!-- 2nd default -->
-              <li class="cycles-date__item" id="cycles-date__item">
+              <li class="cycles-date__item" id="cycles-date__item-2">
                 <label for="cycles-date__input-2">Start date-2:</label>
                 <input type="date" name="flowstart-2" class="cycles-date__input" id="cycles-date__input-2" data-date="flowstart">
               </li>
@@ -59,7 +59,7 @@
           </form>
         </section>
       </div>
-      <div class="calc-results">
+      <div class="calc-results" aria-live="polite">
         <section class="calc-result" id="calc-result"></section>
         <section class="calc-charts" id="calc-charts"></section>
       </div>
