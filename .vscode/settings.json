@@ -5,6 +5,7 @@
         "atts",
         "elem",
         "flowstart",
+        "offscreen",
         "xlink"
     ]
 }
