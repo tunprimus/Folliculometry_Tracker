@@ -23,13 +23,14 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
   cyclesNum = parseInt(cyclesNum, 10);
   // console.log(cyclesNum);
   createDateInputs();
+  cyclesFormElement.reset();
   return cyclesNum;
 });
 
 // Create more date input elements and add to document
 function createDateInputs() {
   let numDateInputs = cyclesNum;
-  console.log(numDateInputs);
+  // console.log(numDateInputs);
   if (isNaN(numDateInputs)) {
     return;
   }
@@ -37,13 +38,32 @@ function createDateInputs() {
   if (numDateInputs > 2) {
     const fragment = document.createDocumentFragment();
     let counter = numDateInputs;
-    let i = 2;
+    let item = 2;
     while (counter > 2) {
+      /* 
       let dateInput = cycleDateElement.cloneNode(true);
-      i++;
+      let temp = dateInput.id;
+      let temp2 = temp.slice(0, -1) + `${item + 1}`;
+      dateInput.id = temp2;
+      console.log(dateInput);
+      // console.log(dateInput.childNodes);
+      // console.log(dateInput.children);
+      */
+      let liNum = `${item + 1}`;
+      let newDateListElement = document.createElement('li');
+      newDateListElement.innerHTML = `
+        <label for="cycles-date__input-${liNum}">Start date-${liNum}:</label>
+        <input type="date" name="flowstart-${liNum}" class="cycles-date__input" id="cycles-date__input-${liNum}" data-date="flowstart" required>
+      `;
+      newDateListElement.id = `cycles-date__item-${liNum}`;
+      newDateListElement.class = 'cycles-date__item';
+      console.log(newDateListElement);
+      fragment.appendChild(newDateListElement);
+      item++;
       //
       counter--;
     }
+    dateListElement.appendChild(fragment);
   }
 }
 
