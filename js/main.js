@@ -10,9 +10,9 @@ const cycleDateElement = document.querySelector('.cycles-date__item');
 const resultsElement = document.querySelector('#calc-result');
 const chartsElement = document.querySelector('calc-charts');
 
-/* 
+
 // Handle selecting number of start dates
-cyclesFormElement.addEventListener('submit', (event) => {
+cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(event) {
   event.preventDefault();
   const data = new FormData(event.target);
   // let dataArray = [...data.entries()];
@@ -21,28 +21,13 @@ cyclesFormElement.addEventListener('submit', (event) => {
     cyclesNum = value;
   }
   cyclesNum = parseInt(cyclesNum, 10);
-  console.log(cyclesNum);
+  // console.log(cyclesNum);
+  createDateInputs();
   return cyclesNum;
 });
- */
-
-// 
-function getCycleNum(ev) {
-  ev.preventDefault();
-  // let cyclesNum;
-  const data = new FormData(ev.target);
-  for (const [name,value] of data) {
-    cyclesNum = value;
-    cyclesNum = parseInt(cyclesNum, 10);
-  }
-  console.log(cyclesNum);
-  return cyclesNum;
-}
-
-cyclesFormElement.addEventListener('submit', getCycleNum());
 
 // Create more date input elements and add to document
-function createDateInputs(cyclesNum) {
+function createDateInputs() {
   let numDateInputs = cyclesNum;
   console.log(numDateInputs);
   if (isNaN(numDateInputs)) {
@@ -75,3 +60,4 @@ function createDateInputs(cyclesNum) {
 
 
 // Create charts
+createDateInputs();
