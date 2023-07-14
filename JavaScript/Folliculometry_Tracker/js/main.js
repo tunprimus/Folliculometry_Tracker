@@ -14,6 +14,7 @@ const chartsElement = document.querySelector('calc-charts');
 // Handle selecting number of start dates
 cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(event) {
   event.preventDefault();
+  console.log(event.target);
   const data = new FormData(event.target);
   // let dataArray = [...data.entries()];
   for (const [name,value] of data) {
@@ -21,7 +22,7 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
     cyclesNum = value;
   }
   cyclesNum = parseInt(cyclesNum, 10);
-  // console.log(cyclesNum);
+
   createDateInputs();
   cyclesFormElement.reset();
   return cyclesNum;
@@ -30,7 +31,7 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
 // Create more date input elements and add to document
 function createDateInputs() {
   let numDateInputs = cyclesNum;
-  // console.log(numDateInputs);
+
   if (isNaN(numDateInputs)) {
     return;
   }
@@ -57,10 +58,9 @@ function createDateInputs() {
       `;
       newDateListElement.id = `cycles-date__item-${liNum}`;
       newDateListElement.class = 'cycles-date__item';
-      console.log(newDateListElement);
       fragment.appendChild(newDateListElement);
+
       item++;
-      //
       counter--;
     }
     dateListElement.appendChild(fragment);
