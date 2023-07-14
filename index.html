@@ -59,9 +59,53 @@
           </form>
         </section>
       </div>
-      <div class="calc-results" aria-live="polite">
-        <section class="calc-result" id="calc-result" data-results="results"></section>
-        <section class="calc-charts" id="calc-charts" data-results="charts"></section>
+      <div class="results" aria-live="polite">
+        <section class="result" id="result" data-result="result">
+          <table class="result-table" id="result-table" data-result="result-table">
+            <caption>Menstrual Cycle Calculation Results</caption>
+            <thead class="result-table__head">
+              <tr>
+                <th>Description</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody class="result-table__body">
+              <tr>
+                <td class="result-table__desc">Last Menstrual Period:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Longest cycle length:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Shortest cycle length:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Averaged cycle length:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Longest day of ovulation:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Shortest day of ovulation:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Average day of ovulation:</td>
+                <td class="result-table__value"></td>
+              </tr>
+              <tr>
+                <td class="result-table__desc">Ovulation Date:</td>
+                <td class="result-table__value"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="charts" id="charts" data-results="charts"></section>
       </div>
     </div>
   </main>
