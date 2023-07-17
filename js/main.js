@@ -1,12 +1,17 @@
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
 let cyclesNum;
+let datesCollector = {};
 
+const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
+const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
 const cyclesFormElement = document.querySelector('#form-cycles-num');
 const cyclesSelectElement = document.querySelector('#cycles-num__select');
 const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
 const cycleDateElement = document.querySelector('.cycles-date__item');
+const sectionResultsElement = document.querySelector('#results');
+const sectionChartsElement = document.querySelector('#charts');
 const resultsElement = document.querySelector('#calc-result');
 const chartsElement = document.querySelector('calc-charts');
 
@@ -14,7 +19,9 @@ const chartsElement = document.querySelector('calc-charts');
 // Handle selecting number of start dates
 cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(event) {
   event.preventDefault();
-  console.log(event.target);
+  if (!event.target.matches('#form-cycles-num')) {
+    return;
+  }
   const data = new FormData(event.target);
   // let dataArray = [...data.entries()];
   for (const [name,value] of data) {
@@ -25,6 +32,7 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
 
   createDateInputs();
   cyclesFormElement.reset();
+  sectionCyclesNumElement.classList.toggle('hide');
   return cyclesNum;
 });
 
@@ -71,7 +79,20 @@ function createDateInputs() {
 
 
 // Handle dates form submission
-
+function handleDateSubmit() {
+  datesFormElement.addEventListener('submit', event => {
+    event.preventDefault();
+    console.log(event.target);
+    if (!event.target.matches('#form-cycles-date')) {
+      return;
+    }
+    for (const {key, valueAsDate} of event.target) {
+      if (valueAsDate) {
+        console.log(valueAsDate);
+      }
+    }
+  });
+}
 
 // Process the date inputs
 
@@ -81,3 +102,4 @@ function createDateInputs() {
 
 // Create charts
 createDateInputs();
+handleDateSubmit();

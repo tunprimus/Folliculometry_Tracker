@@ -17,7 +17,7 @@
       <div class="cycles-form-group">
 
         <!-- Choose number of cycles for calculation -->
-        <section class="cycles-form-num">
+        <section class="cycles-form-num" id="cycles-form-num">
           <h3 class="h3">Choose Number of Cycles</h3>
           <form action="" class="form-cycles-num" id="form-cycles-num" data-form="form-cycles-num" aria-live="polite">
             <label for="cycles-num__select">Select number of start dates</label>
@@ -41,7 +41,7 @@
         <br>
 
         <!-- Input calendar dates to be used in the calculation -->
-        <section class="cycles-form-date">
+        <section class="cycles-form-date" id="cycles-form-date">
           <h3 class="h3">Click the Start Dates on the Calendar</h3>
           <form action="" class="form-cycles-date" id="form-cycles-date" data-form="form-cycles-date" aria-live="polite">
             <ul class="cycles-date-list" id="cycles-date-list" data-date="cycles-date-list">
@@ -61,8 +61,12 @@
         </section>
       </div>
       <br>
-      <div class="results" aria-live="polite">
-        <section class="result" id="result" data-result="result">
+
+      <!-- Results and Charts -->
+      <div class="results-charts" aria-live="polite">
+
+        <!-- Results -->
+        <section class="results hide" id="results" data-result="results">
           <table class="result-table" id="result-table" data-result="result-table">
             <caption>Menstrual Cycle Calculation Results</caption>
             <thead class="result-table__head">
@@ -108,7 +112,9 @@
           </table>
         </section>
         <br>
-        <section class="charts" id="charts" data-results="charts"></section>
+
+        <!-- Charts -->
+        <section class="charts hide" id="charts" data-results="charts"></section>
       </div>
     </div>
   </main>

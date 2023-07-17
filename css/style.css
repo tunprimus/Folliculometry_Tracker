@@ -12,3 +12,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+.hide {
+	display: none;
+}
