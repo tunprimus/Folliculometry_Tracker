@@ -1,5 +1,5 @@
 
-
+import differenceInDays from './date-day-diff.js';
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
@@ -87,15 +87,24 @@ function createDateInputs() {
 function handleDateSubmit() {
   datesFormElement.addEventListener('submit', event => {
     event.preventDefault();
-    console.log(event.target);
+    // console.log(event.target);
     if (!event.target.matches('#form-cycles-date')) {
       return;
     }
+
     for (const {key, valueAsDate} of event.target) {
       if (valueAsDate) {
-        console.log(valueAsDate);
+        // console.log(valueAsDate);
+        datesCollectorArray.push(valueAsDate);
       }
     }
+    
+    const dayDiffArray = [];
+    for (let i = 0; i < datesCollectorArray.length - 1; i++) {
+      dayDiffArray.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
+    }
+    // console.log(dayDiffArray);
+    return dayDiffArray;
   });
 }
 
@@ -106,5 +115,6 @@ function handleDateSubmit() {
 
 
 // Create charts
+
 createDateInputs();
 handleDateSubmit();
