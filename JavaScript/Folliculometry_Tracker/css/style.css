@@ -1,4 +1,9 @@
 
+/* To hide */
+.hidden-all {
+	display: none;
+}
+
 .offscreen, .sr-only, .visually-hidden {
 	position: absolute;
 	width: 1px;
@@ -11,8 +16,4 @@
 	clip-path: inset(50%);
 	overflow: hidden;
 	white-space: nowrap;
-}
-
-.hide {
-	display: none;
 }
