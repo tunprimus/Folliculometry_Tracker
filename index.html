@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Folliculometry Tracker</title>
   <link rel="stylesheet" href="./css/style.css">
-  <script src="./js/main.js" defer></script>
+  <!-- <script type="module" src="./js/main.js" defer></script> -->
+  <!-- <script src="./js/main.js" defer></script> -->
 </head>
 <body>
   <h1 class="title">Folliculometry Tracker</h1>
@@ -66,7 +67,7 @@
       <div class="results-charts" aria-live="polite">
 
         <!-- Results -->
-        <section class="results hide" id="results" data-result="results">
+        <section class="results hidden-all" id="results" data-result="results">
           <table class="result-table" id="result-table" data-result="result-table">
             <caption>Menstrual Cycle Calculation Results</caption>
             <thead class="result-table__head">
@@ -114,7 +115,7 @@
         <br>
 
         <!-- Charts -->
-        <section class="charts hide" id="charts" data-results="charts"></section>
+        <section class="charts hidden-all" id="charts" data-results="charts"></section>
       </div>
     </div>
   </main>

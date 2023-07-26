@@ -1,10 +1,11 @@
 
-import { format, formatDistance, getDay, addDays, subDays, isAfter, isBefore, isDate, max, min, parse, parseISO, toDate } from 'date-fns';
+
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
 let cyclesNum;
-let datesCollector = {};
+let datesCollectorObj = {};
+let datesCollectorArray = [];
 
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
 const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
@@ -14,6 +15,7 @@ const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
 const cycleDateElement = document.querySelector('.cycles-date__item');
 const sectionResultsElement = document.querySelector('#results');
+const resultCellsElements = sectionResultsElement.querySelectorAll('.result-table__value');
 const sectionChartsElement = document.querySelector('#charts');
 const resultsElement = document.querySelector('#calc-result');
 const chartsElement = document.querySelector('calc-charts');
@@ -35,7 +37,7 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
 
   createDateInputs();
   cyclesFormElement.reset();
-  sectionCyclesNumElement.classList.toggle('hide');
+  sectionCyclesNumElement.classList.toggle('hidden-all');
   return cyclesNum;
 });
 
