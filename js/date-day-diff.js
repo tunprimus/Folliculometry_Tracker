@@ -19,7 +19,7 @@ function dateAsStringIsValid(dateStr) {
       return false;
     }
     return true;
-    return date1.toISOString().startsWith(dateStr);
+    // return date1.toISOString().startsWith(dateStr);
   }
 
   if (dateStr.match(regexDDMMYYYY)) {
@@ -35,7 +35,7 @@ function dateAsStringIsValid(dateStr) {
       return false;
     }
     return true;
-    return date2.toISOString().startsWith(dateStr);
+    // return date2.toISOString().startsWith(dateStr);
   }
 }
 
