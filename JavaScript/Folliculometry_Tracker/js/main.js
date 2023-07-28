@@ -3,19 +3,22 @@ import differenceInDays from './date-day-diff.js';
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
+const dateLocales = undefined;
+const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 let cyclesNum;
 let datesCollectorObj = {};
 let datesCollectorArray = [];
+let dateLMP;
 
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
 const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
 const cyclesFormElement = document.querySelector('#form-cycles-num');
-const cyclesSelectElement = document.querySelector('#cycles-num__select');
+// const cyclesSelectElement = document.querySelector('#cycles-num__select');
 const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
-const cycleDateElement = document.querySelector('.cycles-date__item');
+// const cycleDateElement = document.querySelector('.cycles-date__item');
 const sectionResultsElement = document.querySelector('#results');
-const resultCellsElements = sectionResultsElement.querySelectorAll('.result-table__value');
+const resultCellsElements = document.querySelectorAll('.result-table__value');
 const sectionChartsElement = document.querySelector('#charts');
 const resultsElement = document.querySelector('#calc-result');
 const chartsElement = document.querySelector('calc-charts');
@@ -28,9 +31,8 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
     return;
   }
   const data = new FormData(event.target);
-  // let dataArray = [...data.entries()];
+  
   for (const [name,value] of data) {
-    // console.log(name, ":", value);
     cyclesNum = value;
   }
   cyclesNum = parseInt(cyclesNum, 10);
@@ -54,15 +56,6 @@ function createDateInputs() {
     let counter = numDateInputs;
     let item = 2;
     while (counter > 2) {
-      /* 
-      let dateInput = cycleDateElement.cloneNode(true);
-      let temp = dateInput.id;
-      let temp2 = temp.slice(0, -1) + `${item + 1}`;
-      dateInput.id = temp2;
-      console.log(dateInput);
-      // console.log(dateInput.childNodes);
-      // console.log(dateInput.children);
-      */
       let liNum = `${item + 1}`;
       let newDateListElement = document.createElement('li');
       newDateListElement.innerHTML = `
@@ -92,20 +85,42 @@ function handleDateSubmit() {
       return;
     }
 
-    for (const {key, valueAsDate} of event.target) {
-      if (valueAsDate) {
-        // console.log(valueAsDate);
-        datesCollectorArray.push(valueAsDate);
+    function extractDate() {
+      for (const {key, valueAsDate} of event.target) {
+        if (valueAsDate) {
+          // console.log(valueAsDate);
+          datesCollectorArray.push(valueAsDate);
+        }
       }
+      return datesCollectorArray;
     }
     
-    const dayDiffArray = [];
-    for (let i = 0; i < datesCollectorArray.length - 1; i++) {
-      dayDiffArray.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
+    function getDayDiff() {
+      extractDate();
+      const dayDiffArray = [];
+      for (let i = 0; i < datesCollectorArray.length - 1; i++) {
+        dayDiffArray.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
+      }
+      console.log(dayDiffArray);
+      return dayDiffArray;
     }
-    // console.log(dayDiffArray);
-    return dayDiffArray;
+
+    // Function to get the LMP
+    function getLMP(datesArray) {
+      const forLMP = [];
+      for (const value of Object.values(datesArray)) {
+        // console.log(`${value}: ${value.getDate()}`);
+        forLMP.push(value.toLocaleString(dateLocales, dateOptions));
+      }
+      dateLMP = forLMP.pop();
+      // console.log(dateLMP);
+      return dateLMP;
+    }
+    getLMP(datesCollectorArray);
+    getDayDiff();
+    
   });
+  // sectionCyclesDatesElement.classList.toggle('hidden-all');
 }
 
 // Process the date inputs
