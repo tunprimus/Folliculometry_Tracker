@@ -1,13 +1,14 @@
 
-import { addDaysToDate, subDaysFromDate } from './dateAddSub.js';
-import differenceInDays from './date-day-diff.js';
+import differenceInDays from './date-day-library.js';
+import addDaysToDate from './date-day-library.js';
+import subDaysFromDate from './date-day-library.js';
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
 const dateLocales = undefined;
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 let cyclesNum;
-const infoCollectorObj = {};
+const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '',};
 const datesCollectorArray = [];
 let dateLMP;
 let dateLMPStr = '';
