@@ -7,6 +7,8 @@
   <title>Folliculometry Tracker</title>
   <link rel="stylesheet" href="./css/style.css">
   <script type="module" src="./js/main.js" defer></script>
+  <script type="module" src="./js/date-day-diff.js" defer></script>
+  <script type="module" src="./js/dateAddSub.js" defer></script>
   <!-- <script src="./js/main.js" defer></script> -->
 </head>
 <body>
@@ -58,6 +60,7 @@
               </li>
             </ul>
             <button type="submit" class="cycles-date__submit" id="cycles-date__submit">Continue</button>
+            <button type="reset" class="cycles-date__reset offscreen" id="cycles-date__reset">Reset</button>
           </form>
         </section>
       </div>
@@ -67,7 +70,7 @@
       <div class="results-charts" aria-live="polite">
 
         <!-- Results -->
-        <section class="results hidden-all" id="results" data-result="results">
+        <section class="results xhidden-all" id="results" data-result="results">
           <table class="result-table" id="result-table" data-result="result-table">
             <caption>Menstrual Cycle Calculation Results</caption>
             <thead class="result-table__head">
