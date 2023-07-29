@@ -77,5 +77,44 @@ function differenceInDays(bufDateLeft, bufDateRight) {
   }
 }
 
-// export default differenceInDays;
-export default { differenceInDays, dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, };
+function addDaysToDate(bufDate, bufDays) {
+  if ((!dateObjIsValid(bufDate)) || (!dateAsStringIsValid(bufDate))) {
+    return;
+  }
+
+  let toUseDate = bufDate;
+  let toUseAmount = bufDays;
+
+  if (isNaN(toUseAmount)) {
+    return new Date(NaN);
+  }
+
+  if (!toUseAmount) {
+    return toUseDate;
+  }
+
+  toUseDate.setDate(toUseDate.getDate() + toUseAmount);
+  return toUseDate;
+}
+
+function subDaysFromDate(bufDate, bufDays) {
+  if ((!dateObjIsValid(bufDate)) || (!dateAsStringIsValid(bufDate))) {
+    return;
+  }
+
+  let toUseDate = bufDate;
+  let toUseAmount = bufDays;
+
+  if (isNaN(toUseAmount)) {
+    return new Date(NaN);
+  }
+
+  if (!toUseAmount) {
+    return toUseDate;
+  }
+
+  toUseDate.setDate(toUseDate.getDate() - toUseAmount);
+  return toUseDate;
+}
+
+export default { differenceInDays, dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, addDaysToDate, subDaysFromDate, };
