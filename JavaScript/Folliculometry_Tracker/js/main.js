@@ -1,4 +1,5 @@
 
+import { addDaysToDate, subDaysFromDate } from './dateAddSub.js';
 import differenceInDays from './date-day-diff.js';
 
 // Declare variables and constants
@@ -6,9 +7,17 @@ const LUTEAL_PHASE_LENGTH = 14;
 const dateLocales = undefined;
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 let cyclesNum;
-let datesCollectorObj = {};
-let datesCollectorArray = [];
+const infoCollectorObj = {};
+const datesCollectorArray = [];
 let dateLMP;
+let dateLMPStr = '';
+let longestCycleLength = 0;
+let shortestCycleLength = 0;
+let averageCycleLength = 0;
+let longestDayOvulation = 0;
+let shortestDayOvulation = 0;
+let averageDayOvulation = 0;
+let predictedOvulationDate = '';
 
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
 const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
@@ -16,7 +25,7 @@ const cyclesFormElement = document.querySelector('#form-cycles-num');
 // const cyclesSelectElement = document.querySelector('#cycles-num__select');
 const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
-// const cycleDateElement = document.querySelector('.cycles-date__item');
+const datesResetButtonElement = document.querySelector('#cycles-date__reset');
 const sectionResultsElement = document.querySelector('#results');
 const resultCellsElements = document.querySelectorAll('.result-table__value');
 const sectionChartsElement = document.querySelector('#charts');
@@ -85,6 +94,20 @@ function handleDateSubmit() {
       return;
     }
 
+    // Function to get the LMP
+    function getLMP(datesArray) {
+      while (!datesArray) {
+        continue;
+      }
+      let lastItem = datesArray.slice(-1)[0];
+      // console.log(lastItem);
+      dateLMP = lastItem;
+      // console.log(dateLMP);
+      dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
+      // console.log(dateLMPStr);
+      return dateLMP, dateLMPStr;
+    }
+
     function extractDate() {
       for (const {key, valueAsDate} of event.target) {
         if (valueAsDate) {
@@ -92,38 +115,34 @@ function handleDateSubmit() {
           datesCollectorArray.push(valueAsDate);
         }
       }
+      getLMP(datesCollectorArray);
       return datesCollectorArray;
     }
     
     function getDayDiff() {
       extractDate();
-      const dayDiffArray = [];
+      let dayDiffArray;
+      let dayDiffArrayTemp = [];
       for (let i = 0; i < datesCollectorArray.length - 1; i++) {
-        dayDiffArray.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
+        dayDiffArrayTemp.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
       }
+      
+      dayDiffArray = dayDiffArrayTemp;
+      dayDiffArrayTemp = null;
       console.log(dayDiffArray);
       return dayDiffArray;
     }
-
-    // Function to get the LMP
-    function getLMP(datesArray) {
-      const forLMP = [];
-      for (const value of Object.values(datesArray)) {
-        // console.log(`${value}: ${value.getDate()}`);
-        forLMP.push(value.toLocaleString(dateLocales, dateOptions));
-      }
-      dateLMP = forLMP.pop();
-      // console.log(dateLMP);
-      return dateLMP;
-    }
-    getLMP(datesCollectorArray);
-    getDayDiff();
     
+    getDayDiff();
+    datesResetButtonElement.click();
   });
   // sectionCyclesDatesElement.classList.toggle('hidden-all');
-}
 
-// Process the date inputs
+  // Process the date inputs
+  function calcMenstrualParameters() {
+    //
+  }
+}
 
 
 // Return results to page

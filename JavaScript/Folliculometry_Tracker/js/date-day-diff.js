@@ -77,4 +77,5 @@ function differenceInDays(bufDateLeft, bufDateRight) {
   }
 }
 
-export default differenceInDays;
+// export default differenceInDays;
+export default { differenceInDays, dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, };
