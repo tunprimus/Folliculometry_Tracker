@@ -8,7 +8,7 @@ const LUTEAL_PHASE_LENGTH = 14;
 const dateLocales = undefined;
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 let cyclesNum;
-const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '',};
+const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '',};
 const datesCollectorArray = [];
 let dateLMP;
 let dateLMPStr = '';
@@ -18,7 +18,10 @@ let averageCycleLength = 0;
 let longestDayOvulation = 0;
 let shortestDayOvulation = 0;
 let averageDayOvulation = 0;
-let predictedOvulationDate = '';
+let predictedOvulationDate;
+let predictedOvulationDateStr = '';
+let alreadyOvulated = '';
+let cycleEndDate;
 
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
 const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
@@ -104,8 +107,9 @@ function handleDateSubmit() {
       // console.log(lastItem);
       dateLMP = lastItem;
       // console.log(dateLMP);
+      menstrualInfo.dateLMP = dateLMP;
       dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
-      // console.log(dateLMPStr);
+      menstrualInfo.dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
       return dateLMP, dateLMPStr;
     }
 
@@ -136,13 +140,64 @@ function handleDateSubmit() {
     
     getDayDiff();
     datesResetButtonElement.click();
+
+    // Process the date inputs
+    function calcMenstrualParameters() {
+      function longestCycleLengthCalc () {
+        menstrualInfo.longestCycleLength = Math.max(datesCollectorArray);
+        return longestCycleLength = Math.max(datesCollectorArray);
+      }
+
+      function shortestCycleLengthCalc() {
+        menstrualInfo.shortestCycleLength = Math.min(datesCollectorArray);
+        return shortestCycleLength = Math.min(datesCollectorArray);
+      }
+
+      function averageCycleLengthCalc() {
+        menstrualInfo.averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
+        return averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
+      }
+
+      function longestDayToOvulateCalc () {
+        menstrualInfo.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+        return longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+      }
+
+      function shortestDayToOvulateCalc() {
+        menstrualInfo.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+        return shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+      }
+
+      function averageDayToOvulateCalc() {
+        menstrualInfo.averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
+        return averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
+      }
+
+      function determineOvulationDate() {
+        const todayDate = new Date();
+
+        let predictedBuffer = dateLMP;
+        cycleEndDate = addDaysToDate(predictedBuffer, averageCycleLength);
+
+        predictedOvulationDate = subDaysFromDate(cycleEndDate, LUTEAL_PHASE_LENGTH);
+
+        if (differenceInDays(predictedOvulationDate, todayDate) < 1) {
+          alreadyOvulated = 'You would have ovulated!';
+        }
+
+        menstrualInfo.predictedOvulationDate = predictedOvulationDate;
+
+        predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
+        menstrualInfo.predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
+
+        return predictedOvulationDate;
+      }
+    }
+    calcMenstrualParameters();
   });
   // sectionCyclesDatesElement.classList.toggle('hidden-all');
 
-  // Process the date inputs
-  function calcMenstrualParameters() {
-    //
-  }
+
 }
 
 
