@@ -1,8 +1,8 @@
-function dateObjIsValid(date) {
+export function dateObjIsValid(date) {
   return date instanceof Date && !isNaN(date);
 }
 
-function dateAsStringIsValid(dateStr) {
+export function dateAsStringIsValid(dateStr) {
   const regexYYYYMMDD = /^\d{4}-\d{2}-\d{2}$/;
   const regexDDMMYYYY = /^\d{2}\/\d{2}\/\d{4}$/;
 
@@ -39,7 +39,7 @@ function dateAsStringIsValid(dateStr) {
   }
 }
 
-function compareLocalAsc(laterDate, earlierDate) {
+export function compareLocalAsc(laterDate, earlierDate) {
   if ((dateObjIsValid(laterDate)) && (dateObjIsValid(earlierDate))) {
     const diff = laterDate.getFullYear() - earlierDate.getFullYear() || laterDate.getMonth() - earlierDate.getMonth() || laterDate.getDate() - earlierDate.getDate() || laterDate.getHours() - earlierDate.getHours || laterDate.getMinutes() - earlierDate.getMinutes() || laterDate.getSeconds() - earlierDate.getSeconds() || laterDate.getMilliseconds() - earlierDate.getMilliseconds();
 
@@ -53,7 +53,7 @@ function compareLocalAsc(laterDate, earlierDate) {
   }
 }
 
-function dateSort(bufDateLeft, bufDateRight) {
+export function dateSort(bufDateLeft, bufDateRight) {
   if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
     const dateLeft = bufDateLeft;
     const dateRight = bufDateRight;
@@ -62,7 +62,7 @@ function dateSort(bufDateLeft, bufDateRight) {
   }
 }
 
-function differenceInDays(bufDateLeft, bufDateRight) {
+export function differenceInDays(bufDateLeft, bufDateRight) {
   if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
     const dateLeft = bufDateLeft;
     const dateRight = bufDateRight;
@@ -77,7 +77,7 @@ function differenceInDays(bufDateLeft, bufDateRight) {
   }
 }
 
-function addDaysToDate(bufDate, bufDays) {
+export function addDaysToDate(bufDate, bufDays) {
   if ((!dateObjIsValid(bufDate)) || (!dateAsStringIsValid(bufDate))) {
     return;
   }
@@ -97,7 +97,7 @@ function addDaysToDate(bufDate, bufDays) {
   return toUseDate;
 }
 
-function subDaysFromDate(bufDate, bufDays) {
+export function subDaysFromDate(bufDate, bufDays) {
   if ((!dateObjIsValid(bufDate)) || (!dateAsStringIsValid(bufDate))) {
     return;
   }
@@ -117,4 +117,6 @@ function subDaysFromDate(bufDate, bufDays) {
   return toUseDate;
 }
 
-export default { differenceInDays, dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, addDaysToDate, subDaysFromDate, };
+// module.exports = { differenceInDays, dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, addDaysToDate, subDaysFromDate, };
+
+export default differenceInDays;
