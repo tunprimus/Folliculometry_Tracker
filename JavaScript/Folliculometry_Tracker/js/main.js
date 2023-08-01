@@ -140,72 +140,71 @@ function handleDateSubmit() {
     
     getDayDiff();
     datesResetButtonElement.click();
-
-    // Process the date inputs
-    function calcMenstrualParameters() {
-      function longestCycleLengthCalc () {
-        menstrualInfo.longestCycleLength = Math.max(datesCollectorArray);
-        return longestCycleLength = Math.max(datesCollectorArray);
-      }
-      longestCycleLengthCalc ();
-
-      function shortestCycleLengthCalc() {
-        menstrualInfo.shortestCycleLength = Math.min(datesCollectorArray);
-        return shortestCycleLength = Math.min(datesCollectorArray);
-      }
-      shortestCycleLengthCalc();
-
-      function averageCycleLengthCalc() {
-        menstrualInfo.averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
-        return averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
-      }
-      averageCycleLengthCalc();
-
-      function longestDayToOvulateCalc() {
-        menstrualInfo.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
-        return longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
-      }
-      longestDayToOvulateCalc();
-
-      function shortestDayToOvulateCalc() {
-        menstrualInfo.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
-        return shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
-      }
-      shortestDayToOvulateCalc();
-
-      function averageDayToOvulateCalc() {
-        menstrualInfo.averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
-        return averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
-      }
-      averageDayToOvulateCalc();
-
-      function determineOvulationDate() {
-        const todayDate = new Date();
-
-        let predictedBuffer = dateLMP;
-        cycleEndDate = addDaysToDate(predictedBuffer, averageCycleLength);
-
-        predictedOvulationDate = subDaysFromDate(cycleEndDate, LUTEAL_PHASE_LENGTH);
-
-        if (differenceInDays(predictedOvulationDate, todayDate) < 1) {
-          alreadyOvulated = 'You would have ovulated!';
-        }
-
-        menstrualInfo.predictedOvulationDate = predictedOvulationDate;
-
-        predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
-        console.log(predictedOvulationDateStr);
-        menstrualInfo.predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
-
-        return predictedOvulationDate;
-      }
-      determineOvulationDate();
-    }
     calcMenstrualParameters();
+
   });
   // sectionCyclesDatesElement.classList.toggle('hidden-all');
 
+  // Process the date inputs
+  function calcMenstrualParameters() {
+    function longestCycleLengthCalc () {
+      menstrualInfo.longestCycleLength = Math.max(datesCollectorArray);
+      return longestCycleLength = Math.max(datesCollectorArray);
+    }
+    longestCycleLengthCalc ();
 
+    function shortestCycleLengthCalc() {
+      menstrualInfo.shortestCycleLength = Math.min(datesCollectorArray);
+      return shortestCycleLength = Math.min(datesCollectorArray);
+    }
+    shortestCycleLengthCalc();
+
+    function averageCycleLengthCalc() {
+      menstrualInfo.averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
+      return averageCycleLength = datesCollectorArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
+    }
+    averageCycleLengthCalc();
+
+    function longestDayToOvulateCalc() {
+      menstrualInfo.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+      return longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+    }
+    longestDayToOvulateCalc();
+
+    function shortestDayToOvulateCalc() {
+      menstrualInfo.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+      return shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+    }
+    shortestDayToOvulateCalc();
+
+    function averageDayToOvulateCalc() {
+      menstrualInfo.averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
+      return averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
+    }
+    averageDayToOvulateCalc();
+
+    function determineOvulationDate() {
+      const todayDate = new Date();
+
+      let predictedBuffer = dateLMP;
+      cycleEndDate = addDaysToDate(predictedBuffer, averageCycleLength);
+
+      predictedOvulationDate = subDaysFromDate(cycleEndDate, LUTEAL_PHASE_LENGTH);
+
+      if (differenceInDays(predictedOvulationDate, todayDate) < 1) {
+        alreadyOvulated = 'You would have ovulated!';
+      }
+
+      menstrualInfo.predictedOvulationDate = predictedOvulationDate;
+
+      predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
+      console.log(predictedOvulationDateStr);
+      menstrualInfo.predictedOvulationDateStr = predictedOvulationDate.toLocaleString(dateLocales, dateOptions);
+
+      return predictedOvulationDate;
+    }
+    determineOvulationDate();
+  }
 }
 
 
