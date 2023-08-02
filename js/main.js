@@ -9,7 +9,8 @@ import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInDays }  fr
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
-const dateLocales = undefined;
+// const dateLocales = undefined;
+const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 let cyclesNum;
 const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
