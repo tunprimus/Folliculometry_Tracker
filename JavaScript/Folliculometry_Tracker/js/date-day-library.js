@@ -12,15 +12,8 @@ function dateAsStringIsValid(forDateStr) {
   const regexDDMMYYYY = /^\d{2}([./-])\d{2}\1\d{4}$/;
   const regexMMDDYYYY = /^\d{2}([./-])\d{2}\1\d{4}$/;
 
-  let isTrue = false;
-
   const dateStr = new String(forDateStr);
-  /* 
-  console.log(dateStr);
-  console.log(dateStr.match(regexYYYYMMDD));
-  console.log(dateStr.match(regexDDMMYYYY));
-  console.log(dateStr.match(regexMMDDYYYY));
- */
+  
   function checkYYYYMMDD(dateStr) {
     if (dateStr.match(regexYYYYMMDD)) {
       const date1 = new Date(dateStr);
@@ -103,6 +96,7 @@ function dateAsStringIsValid(forDateStr) {
     && https://refine.dev/blog/javascript-ternary-operator/
   */
   
+  let isTrue = false;
   const finalState = isTrue === true ? isTrue
     : isTrue = checkYYYYMMDD(dateStr) ? true
     : isTrue = checkDDMMYYYY(dateStr) ? true
@@ -142,10 +136,6 @@ function addDaysToDate(bufDate, bufDays) {
     return;
   }
 
-  /* if (!dateObjIsValid(bufDate)) {
-    return;
-  } */
-
   let toUseDate = bufDate;
   let toUseAmount = bufDays;
 
@@ -165,10 +155,6 @@ function subDaysFromDate(bufDate, bufDays) {
   if ((!dateObjIsValid(bufDate)) && (!dateAsStringIsValid(bufDate))) {
     return;
   }
-
-  /* if (!dateObjIsValid(bufDate)) {
-    return;
-  } */
 
   let toUseDate = bufDate;
   let toUseAmount = bufDays;
