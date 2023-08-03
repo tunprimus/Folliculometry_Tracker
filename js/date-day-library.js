@@ -186,6 +186,21 @@ function differenceInDays(bufDateLeft, bufDateRight) {
   }
 }
 
+function differenceInCalendarDays(bufDateLeft, bufDateRight) {
+  if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
+    const dateLeft = bufDateLeft;
+    const dateRight = bufDateRight;
+    const timestampLeft = dateLeft.getTime();
+    const timestampRight = dateRight.getTime();
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    const difference = Math.abs(timestampLeft - timestampRight);
+    const daysDiff = Math.round((difference / oneDay));
+    return daysDiff;
+  }
+}
+
 /* 
 const myDate = new Date('2023-07-07');
 console.log(myDate);
@@ -196,4 +211,4 @@ let subFromMyDate = subDaysFromDate(myDate, 1050);
 console.log(subFromMyDate);
  */
 
-export { dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, addDaysToDate, subDaysFromDate, differenceInDays, };
+export { dateObjIsValid, dateAsStringIsValid, compareLocalAsc, dateSort, addDaysToDate, subDaysFromDate, differenceInDays, differenceInCalendarDays, };
