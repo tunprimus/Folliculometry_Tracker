@@ -5,13 +5,15 @@ import addDaysToDate from './date-day-library.js';
 import subDaysFromDate from './date-day-library.js';
  */
 
-import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInDays }  from './date-day-library.js';
+import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInDays, differenceInCalendarDays }  from './date-day-library.js';
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
+const MENSES_SHIFT = 1; // Because there is no day 0 on the menstrual cycle
 // const dateLocales = undefined;
 const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
+
 let cyclesNum;
 const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
 const datesCollectorArray = [];
@@ -98,7 +100,7 @@ function createDateInputs() {
 function handleDateSubmit() {
   datesFormElement.addEventListener('submit', event => {
     event.preventDefault();
-    // console.log(event.target);
+    
     if (!event.target.matches('#form-cycles-date')) {
       return;
     }
@@ -109,9 +111,9 @@ function handleDateSubmit() {
         continue;
       }
       let lastItem = datesArray.slice(-1)[0];
-      // console.log(lastItem);
+      
       dateLMP = lastItem;
-      // console.log(dateLMP);
+      
       menstrualInfo.dateLMP = dateLMP;
       dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
       menstrualInfo.dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
@@ -121,7 +123,6 @@ function handleDateSubmit() {
     function extractDate() {
       for (const {key, valueAsDate} of event.target) {
         if (valueAsDate) {
-          // console.log(valueAsDate);
           datesCollectorArray.push(valueAsDate);
         }
       }
@@ -134,7 +135,7 @@ function handleDateSubmit() {
       let dayDiffArray;
       let dayDiffArrayTemp = [];
       for (let i = 0; i < datesCollectorArray.length - 1; i++) {
-        dayDiffArrayTemp.push(differenceInDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
+        dayDiffArrayTemp.push(differenceInCalendarDays(datesCollectorArray[i], datesCollectorArray[i + 1]));
       }
       
       dayDiffArray = dayDiffArrayTemp;
@@ -209,26 +210,22 @@ function determineOvulationDate(datesArray, infoObj) {
   let currentLMP = infoObj.dateLMP;
   let avgCycleLen = averageCycleLength;
   
-  let currentCycleEndDate = addDaysToDate(currentLMP, avgCycleLen);
+  let currentCycleEndDate = addDaysToDate(currentLMP, (avgCycleLen - MENSES_SHIFT));
   infoObj.currentCycleEndDate = currentCycleEndDate;
   infoObj.currentCycleEndDateStr = currentCycleEndDate.toLocaleString(dateLocales, dateOptions);
   
   let predictedDate = subDaysFromDate(currentCycleEndDate, LUTEAL_PHASE_LENGTH);
-  // console.log(predictedDate);
 
   if (compareLocalAsc(predictedDate, todayDate) < 1) {
     alreadyOvulated = 'You would have ovulated!';
     infoObj.alreadyOvulated = 'You would have ovulated!';
   }
 
-  console.log(compareLocalAsc(predictedDate, todayDate));
-
   infoObj.predictedOvulationDate = predictedDate;
   predictedOvulationDateStr = predictedDate.toLocaleString(dateLocales, dateOptions);
 
   infoObj.predictedOvulationDateStr = predictedDate.toLocaleString(dateLocales, dateOptions);
 
-  // console.log(infoObj);
   return infoObj;
 }
 
@@ -240,7 +237,7 @@ function calcMenstrualParameters(datesArray, infoObj) {
   shortestDayToOvulateCalc(datesArray, infoObj);
   averageDayToOvulateCalc(datesArray, infoObj);
   determineOvulationDate(datesArray, infoObj);
-  return menstrualInfo;
+  return infoObj;
 }
 
 // Return results to page
