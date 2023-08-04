@@ -9,10 +9,10 @@
   <script type="module" src="./js/main.js" defer></script>
   <!-- <script type="module" src="./js/date-day-library.js" defer></script> -->
 </head>
-<body>
-  <h1 class="title">Folliculometry Tracker</h1>
+<body class="body">
   <main class="main" id="main">
     <div class="wrapper">
+      <h1 class="title">Folliculometry Tracker</h1>
       <h2 class="h2">Your Menstrual Cycle Details</h2>
       <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
       <div class="cycles-form-group">
@@ -70,7 +70,7 @@
         <!-- Results -->
         <section class="results xhidden-all" id="results" data-result="results">
           <table class="result-table" id="result-table" data-result="result-table">
-            <caption>Menstrual Cycle Calculation Results</caption>
+            <caption><h3>Menstrual Cycle Calculation Results</h3></caption>
             <thead class="result-table__head">
               <tr>
                 <th>Description</th>
@@ -80,43 +80,43 @@
             <tbody class="result-table__body">
               <tr>
                 <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td>
-                <td class="result-table__value" data-label="Number of cycles: "></td>
+                <td class="result-table__value" data-label="Number of cycles: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td>
-                <td class="result-table__value" data-label="Last Menstrual Period: "></td>
+                <td class="result-table__value" data-label="Last Menstrual Period: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td>
-                <td class="result-table__value" data-label="Longest cycle length: "></td>
+                <td class="result-table__value" data-label="Longest cycle length: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td>
-                <td class="result-table__value" data-label="Shortest cycle length: "></td>
+                <td class="result-table__value" data-label="Shortest cycle length: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td>
-                <td class="result-table__value" data-label="Averaged cycle length: "></td>
+                <td class="result-table__value" data-label="Averaged cycle length: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td>
-                <td class="result-table__value" data-label="Longest day of ovulation: "></td>
+                <td class="result-table__value" data-label="Longest day of ovulation: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td>
-                <td class="result-table__value" data-label="Shortest day of ovulation: "></td>
+                <td class="result-table__value" data-label="Shortest day of ovulation: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td>
-                <td class="result-table__value" data-label="Average day of ovulation: "></td>
+                <td class="result-table__value" data-label="Average day of ovulation: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td>
-                <td class="result-table__value" data-label="Predicted Ovulation Date: "></td>
+                <td class="result-table__value" data-label="Predicted Ovulation Date: ">{Your result}</td>
               </tr>
               <tr>
                 <td class="result-table__desc" data-label="Ovulated?: "></td>
-                <td class="result-table__value alert-message" data-label="Ovulated?: "></td>
+                <td class="result-table__value alert-message" data-label="Ovulated?: ">{Your result}</td>
               </tr>
             </tbody>
           </table>
