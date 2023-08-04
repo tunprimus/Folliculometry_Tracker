@@ -250,12 +250,15 @@ function calcMenstrualParameters(datesArray, infoObj) {
 // Return results to page
 function generateTableResults(tbodyDom, infoObj) {
   
-  const fragment2 = document.createDocumentFragment();
+  if (!tbodyDom) {
+    return;
+  }
   const newInnerHTML = `
     <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: ">${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: ">${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: ">${infoObj.longestCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: ">${infoObj.averageCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: ">${infoObj.longestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: ">${infoObj.shortestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value" data-label="Average day of ovulation: ">${infoObj.averageDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value" data-label="Predicted Ovulation Date: ">${infoObj.predictedOvulationDateStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message" data-label="Ovulated?: ">${infoObj.alreadyOvulated}</td> </tr>
   `;
-  fragment2.append(newInnerHTML);
-  tbodyDom.innerHTML = newInnerHTML;
+  
+  tbodyDom.innerHTML = '';
+  tbodyDom.innerHTML += newInnerHTML;
   return tbodyDom;
 }
 
