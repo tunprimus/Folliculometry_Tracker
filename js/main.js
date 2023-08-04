@@ -15,7 +15,7 @@ const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 
 let cyclesNum;
-const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
+const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', shortestCycleLength: '', averageCycleLength: '', longestDayOvulation: '', shortestDayOvulation: '', averageDayOvulation: '', predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
 const datesCollectorArray = [];
 let numCyclesGiven;
 let dateLMP;
@@ -143,7 +143,7 @@ function handleDateSubmit() {
       
       dayDiffArray = dayDiffArrayTemp;
       dayDiffArrayTemp = null;
-      console.log(dayDiffArray);
+      
       numCyclesGiven = dayDiffArray.length;
       return dayDiffArray;
     }
@@ -153,8 +153,9 @@ function handleDateSubmit() {
     datesResetButtonElement.click();
 
     calcMenstrualParameters(arrDayDiff, menstrualInfo);
-    // console.log(menstrualInfo);
+    
     sectionCyclesDatesElement.classList.toggle('hidden-all');
+
     generateTableResults(resultTableBodyElement, menstrualInfo);
   });
   
@@ -163,18 +164,29 @@ function handleDateSubmit() {
 // Process the date inputs
 
 function longestCycleLengthCalc (datesArray, infoObj) {
-  
+  const arrLen = datesArray.length;
   longestCycleLength = Math.max(...datesArray);
   
   infoObj.longestCycleLength = Math.max(...datesArray);
+
+  // Comparison only if there are 2 or more cycles
+  if (arrLen < 2) {
+    infoObj.longestCycleLength = '';
+  }
   
   return infoObj;
 }
 
 function shortestCycleLengthCalc(datesArray, infoObj) {
+  const arrLen = datesArray.length;
   shortestCycleLength = Math.min(...datesArray);
   
   infoObj.shortestCycleLength = Math.min(...datesArray);
+
+  // Comparison only if there are 2 or more cycles
+  if (arrLen < 2) {
+    infoObj.shortestCycleLength = '';
+  }
   
   return infoObj;
 }
@@ -188,17 +200,29 @@ function averageCycleLengthCalc(datesArray, infoObj) {
 }
 
 function longestDayToOvulateCalc(datesArray, infoObj) {
+  const arrLen = datesArray.length;
   longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
   
   infoObj.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+
+  // Comparison only if there are 2 or more cycles
+  if (arrLen < 2) {
+    infoObj.longestDayOvulation = '';
+  }
 
   return infoObj;
 }
 
 function shortestDayToOvulateCalc(datesArray, infoObj) {
+  const arrLen = datesArray.length;
   shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
 
   infoObj.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+
+  // Comparison only if there are 2 or more cycles
+  if (arrLen < 2) {
+    infoObj.shortestDayOvulation = '';
+  }
 
   return infoObj;
 }
@@ -211,7 +235,7 @@ function averageDayToOvulateCalc(datesArray, infoObj) {
   return infoObj;
 }
 
-function determineOvulationDate(datesArray, infoObj) {
+function determineOvulationDate(infoObj) {
   const todayDate = new Date();
   
   let currentLMP = infoObj.dateLMP;
@@ -243,7 +267,7 @@ function calcMenstrualParameters(datesArray, infoObj) {
   longestDayToOvulateCalc(datesArray, infoObj);
   shortestDayToOvulateCalc(datesArray, infoObj);
   averageDayToOvulateCalc(datesArray, infoObj);
-  determineOvulationDate(datesArray, infoObj);
+  determineOvulationDate(infoObj);
   return infoObj;
 }
 
