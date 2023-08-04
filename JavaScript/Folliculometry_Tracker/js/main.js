@@ -15,8 +15,9 @@ const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 
 let cyclesNum;
-const menstrualInfo = {dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
+const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: 0, shortestCycleLength: 0, averageCycleLength: 0, longestDayOvulation: 0, shortestDayOvulation: 0, averageDayOvulation: 0, predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
 const datesCollectorArray = [];
+let numCyclesGiven;
 let dateLMP;
 let dateLMPStr = '';
 let longestCycleLength = 0;
@@ -38,6 +39,8 @@ const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
 const datesResetButtonElement = document.querySelector('#cycles-date__reset');
 const sectionResultsElement = document.querySelector('#results');
+const resultTableBodyElement = document.querySelector('.result-table__body');
+// console.log(resultTableBodyElement);
 const resultCellsElements = document.querySelectorAll('.result-table__value');
 const sectionChartsElement = document.querySelector('#charts');
 const resultsElement = document.querySelector('#calc-result');
@@ -72,7 +75,7 @@ function createDateInputs() {
   }
 
   if (numDateInputs > 2) {
-    const fragment = document.createDocumentFragment();
+    const fragment1 = document.createDocumentFragment();
     let counter = numDateInputs;
     let item = 2;
     while (counter > 2) {
@@ -84,12 +87,12 @@ function createDateInputs() {
       `;
       newDateListElement.id = `cycles-date__item-${liNum}`;
       newDateListElement.class = 'cycles-date__item';
-      fragment.appendChild(newDateListElement);
+      fragment1.appendChild(newDateListElement);
 
       item++;
       counter--;
     }
-    dateListElement.appendChild(fragment);
+    dateListElement.appendChild(fragment1);
   }
 }
 
@@ -141,16 +144,20 @@ function handleDateSubmit() {
       dayDiffArray = dayDiffArrayTemp;
       dayDiffArrayTemp = null;
       console.log(dayDiffArray);
+      numCyclesGiven = dayDiffArray.length;
       return dayDiffArray;
     }
     
     let arrDayDiff = getDayDiff();
+    menstrualInfo.numCyclesGiven = arrDayDiff.length;
     datesResetButtonElement.click();
 
     calcMenstrualParameters(arrDayDiff, menstrualInfo);
-    console.log(menstrualInfo);
+    // console.log(menstrualInfo);
+    sectionCyclesDatesElement.classList.toggle('hidden-all');
+    generateTableResults(resultTableBodyElement, menstrualInfo);
   });
-  // sectionCyclesDatesElement.classList.toggle('hidden-all');
+  
 }
 
 // Process the date inputs
@@ -241,7 +248,16 @@ function calcMenstrualParameters(datesArray, infoObj) {
 }
 
 // Return results to page
-
+function generateTableResults(tbodyDom, infoObj) {
+  
+  const fragment2 = document.createDocumentFragment();
+  const newInnerHTML = `
+    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: ">${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: ">${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: ">${infoObj.longestCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: ">${infoObj.averageCycleLength}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: ">${infoObj.longestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: ">${infoObj.shortestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value" data-label="Average day of ovulation: ">${infoObj.averageDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value" data-label="Predicted Ovulation Date: ">${infoObj.predictedOvulationDateStr}</td> </tr> <tr> <td class="result-table__value alert-message" data-label="Ovulated?: ">${infoObj.alreadyOvulated}</td> </tr>
+  `;
+  fragment2.append(newInnerHTML);
+  tbodyDom.innerHTML = newInnerHTML;
+  return tbodyDom;
+}
 
 // Create charts
 
