@@ -279,6 +279,8 @@
 	--grid-min: 20ch;
 	--flex-min: 35rem;
 	--pancake-min: var(--grid-min);
+	--wide: 80vw;
+	--num: 3;
 
 	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
@@ -518,11 +520,28 @@ progress {
 /*---------*/
 
 .body {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 	width: min(100vw - 3rem, var(--container-max, 80ch));
+	min-height: 100vh;
 	margin-inline: auto;
 }
 
+.main {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
 
+.main > .wrapper {
+	flex: max(var(--wide), 100% / var(--num) + 0.1%)
+}
 
 /* To hide */
 .hidden-all {
