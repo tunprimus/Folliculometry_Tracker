@@ -83,7 +83,7 @@ function createDateInputs() {
       let newDateListElement = document.createElement('li');
       newDateListElement.innerHTML = `
         <label for="cycles-date__input-${liNum}">Start date-${liNum}:</label>
-        <input type="date" name="flowstart-${liNum}" class="cycles-date__input" id="cycles-date__input-${liNum}" data-date="flowstart" required>
+        <input type="date" name="flowstart-${liNum}" class="cycles-date__input input" id="cycles-date__input-${liNum}" data-date="flowstart" required>
       `;
       newDateListElement.id = `cycles-date__item-${liNum}`;
       newDateListElement.class = 'cycles-date__item';
