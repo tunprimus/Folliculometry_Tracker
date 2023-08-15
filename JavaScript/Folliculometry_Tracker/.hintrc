@@ -8,7 +8,9 @@
       {
         "ignore": [
           "text-size-adjust",
-          "text-decoration-skip-ink"
+          "text-decoration-skip-ink",
+          "user-select",
+          "-webkit-tap-highlight-color"
         ]
       }
     ],
