@@ -1,7 +1,7 @@
 
-/* -------------------------------------- */
-/*        VARIABLES AND RESETS            */
-/* -------------------------------------- */
+/* -------------------- */
+/* VARIABLES AND RESET */
+/* -------------------- */
 
 /* -------------- */
 /* Root variables */
@@ -158,11 +158,10 @@
     /* Colour themes */
 	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
-
-	--theme-colour-HSL: hsl(337, 86%, 47%);
-	--theme-colour-h: 337;
-	--theme-colour-s: 86%;
-	--theme-colour-l: 47%;
+	--theme-colour-HSL: hsl(216, 85%, 39%);
+	--theme-colour-h: 216;
+	--theme-colour-s: 85%;
+	--theme-colour-l: 39%;
 
 	--theme-colour: hsl(var(--theme-colour-h), var(--theme-colour-s), var(--theme-colour-l));
 	--lighten-percentage: 20%;
@@ -199,7 +198,6 @@
 	--alpha-07: 0.70;
 	--alpha-03: 0.33;
 	--alpha-02: 0.20;
-
 	/* box-shadow: X-offset Y-offset Blur-size Colour*/
 	--box-shadow1: calc(var(--shadow-start) / 2) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-07));
 
@@ -242,18 +240,15 @@
 	Where   XX = min_viewport / 100
 	        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
 	           = 100 * font_size_difference / viewport_difference
-					ZZ = Minimum font-size stated in REM
+					  dZZ = Minimum font-size stated in REM
 
 	Equivalent in longhand
 	font-size = calc(min_font_size_in_REM + (max_font_size - min_font_size) * ((100vw - min_viewport_including_unit) / (max_viewport - min_viewport)))     */
-
 	--custom-font-size-6: calc(1rem + (32 - 16) * ((100vw - 320px) / (2560 - 320)));
-
 	--min-font-size: 16;
   --max-font-size: 32;
   --min-viewport-width: 320;
   --max-viewport-width: 2560;
-
   --custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
@@ -266,7 +261,7 @@
 	--major-second: 1.125;
 	--minor-second: 1.067;
 
-	--font-scale-ratio: var(--major-second); /* input one of the above */
+	--font-scale-ratio: var(/**/);
 	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
 	--fs-5: calc(var(--fs-4) / var(--font-scale-ratio));
 	--fs-4: calc(var(--fs-3) / var(--font-scale-ratio));
@@ -281,12 +276,11 @@
 	--fs5: calc(var(--fs4) * var(--font-scale-ratio));
 	/*-- End of fonts --*/
 
-	/* Column size */
 	--grid-min: 20ch;
 	--flex-min: 35rem;
 	--pancake-min: var(--grid-min);
-	--max-number-of-column: 4;
-	--breakpoint-size: 480;
+	--wide: 80vw;
+	--num: 3;
 
 	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
@@ -295,9 +289,6 @@
 	--padding-lg: clamp(3rem, 12%, 6rem);
 	/* https://matthewjamestaylor.com/responsive-padding */
 	--padding-responsive: calc(8px + 1.5625vw);
-	--padding-responsive--medium: calc(6px + 1.5625vw);
-	--padding-responsive--small: calc(4px + 1.5625vw);
-	--padding-responsive--ex-small: calc(2px + 1.5625vw);
 
 	--margin-sm: min(2rem, 4vh);
 	--margin-md: min(4rem, 8vh);
@@ -313,10 +304,7 @@
 	/*-- End of paddings, margins and gaps --*/
 
 	--border-radius-value: 0.4rem;
-	--border-radius-value--large: 1.2rem;
-	--border-radius-value--medium: 0.8rem;
 	--border-radius-circle-value: 50%;
-	--border-radius-elliptic-value: 25%;
 
 	tab-size: 4;
 	color-scheme: light dark;
@@ -325,9 +313,9 @@
 /*-- End of root variables --*/
 
 
-/* -------------------------------------- */
-/*              RESETS                    */
-/* -------------------------------------- */
+/* ------ */
+/* Resets */
+/* ------ */
 *,
 *::before,
 *::after {
@@ -361,6 +349,7 @@ html {
 html, body {
 	height: 100%;
 	min-height: 100%;
+	color: var(--theme-text-colour, #777777);
 }
 
 body {
@@ -459,19 +448,11 @@ textarea {
 
 button {
 	border: none;
-	border-radius: 0.8rem;
+	border-radius: 0.4rem;
 	font-family: inherit;
 	color: inherit;
 	background-color: transparent;
 	cursor: pointer;
-}
-
-button[disabled] {
-	background-color: inherit;
-	background-color: var(--dual-theme-grey);
-	opacity: 0.5;
-	cursor: not-allowed;
-	pointer-events: none;
 }
 
 p, li, h1, h2, h3, h4, h5, h6 {
@@ -535,271 +516,75 @@ progress {
 
 /*-- End of Resets --*/
 
-/* -------------------------------------- */
-/*              CLASSES                   */
-/* -------------------------------------- */
+/*---------*/
+/* CLASSES */
+/*---------*/
 
-.fab-four,
-.container-fab-four {
-	display: inline-block;
-	vertical-align: top;
-	min-width: calc(100% / var(--max-number-of-column)); /* value to use above breakpoint */
-	width: calc(((var(--breakpoint-size) * 1px) - 100%) * var(--breakpoint-size));
-	max-width: 100%; /* value to use below breakpoint */
-	margin: 0.5rem;
-	padding: 0.25rem;
-	padding: var(--padding-responsive);
-	box-sizing: border-box;
-}
-
-.container-min {
-	width: min(100vw - 3rem, var(--container-max, 80ch));
-	margin-inline: auto;
-}
-
-.container-flexbox-albatross {
-	display: flex;
-	flex-wrap: wrap;
-	/* --margin: 1rem;
-	--modifier: calc(40rem - 100%); */
-	margin: calc(var(--flexbox-albatross-margin) * -1);
-}
-
-.container-flexbox-albatross > * {
-	flex-grow: 1;
-	flex-basis: calc(var(--flexbox-albatross-modifier) * 999);
-	margin: var(--flexbox-albatross-margin);
-}
-
-/* Container queries */
-/* >>> Container Query Solutions with CSS Grid and Flexbox: https://moderncss.dev/container-query-solutions-with-css-grid-and-flexbox/ */
-.grid {
-	display: grid;
-	gap: 1rem;
-	grid-template-columns: repeat(auto-fit, minmax(var(--grid-min), 1fr));
-}
-
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-	margin: 1rem -0.5rem;
-}
-
-.flex > * {
-	flex-grow: 1;
-	flex-basis: calc((var(--flex-min) - 100%) * 999);
-	margin: 0.5rem;
-}
-
-.flex > *.flex--auto {
-	flex: 0 1 auto;
-}
-
-.flex-pancake {
-	display: flex;
-	flex-wrap: wrap;
-	margin: 1rem -0.5rem;
-}
-
-.flex-pancake > * {
-	flex: 1 1 var(--pancake-min);
-	margin: 0.5rem;
-}
-
-.flex-pancake > *.flex--auto {
-	flex: 0 1 auto;
-}
-
-.flex-centre-h {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.flex-centre-v {
+.body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-.body {
-	padding: 2vw;
-	padding: var(--padding-responsive);
-	background: linear-gradient(110deg, var(--darkblue), var(--amethyst), var(--hotpink), var(--violet), var(--violet), var(--violet), var(--amethyst), var(--blue));
+	width: min(100vw - 3rem, var(--container-max, 80ch));
+	min-height: 100vh;
+	margin-inline: auto;
+	background-color: var(--theme-colour-background, #0000FF); /* Small devices need this fallback */
 }
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.main {
-	border: 0.15rem solid var(--dual-theme-grey);
-	border-radius: var(--border-radius-value);
-	margin: 0.5rem 5vw;
-	padding: 1rem;
-	padding: var(--padding-responsive);
-	background-color: var(--theme-colour--dark-d);
-}
-
-.header {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: stretch;
-	padding-bottom: var(--padding-responsive);
-}
-
-.logo {
-	max-width: 25%;
-	min-height: 10%;
-	flex-basis: 100%;
-	background-color: var(--dual-theme-grey);
-	background-color: var(--theme-text-colour);
-	margin-right: var(--padding-responsive);
-}
-
-.content {
-	font: inherit;
-}
-
-.intro {
-	border: 0.15rem solid var(--theme-colour--light-l);
-	border-radius: var(--border-radius-value);
-	padding: 0.25rem var(--padding-responsive);
-}
-
-.intro__image {
-	max-width: 65ch;
-	padding-bottom: var(--padding-responsive);
-}
-
-.h1 {
-	font-size: var(--fs5);
-	font-weight: bold;
-	padding-top: var(--padding-responsive);
-	padding-bottom: var(--padding-responsive);
-}
-
-.h2 {
-	font-size: var(--fs4);
-	padding-top: var(--padding-responsive);
-	padding-bottom: var(--padding-responsive);
-}
-
-.h3 {
-	font-size: var(--fs3);
-	padding-top: var(--padding-responsive--medium);
-	padding-bottom: var(--padding-responsive--ex-small);
-}
-
-.h4 {
-	font-size: var(--fs2);
-	padding-top: var(--padding-responsive--medium);
-	padding-bottom: var(--padding-responsive--ex-small);
-}
-
-.h5 {
-	font-size: var(--fs1);
-	padding-top: var(--padding-responsive--small);
-	padding-bottom: var(--padding-responsive--ex-small);
-}
-
-.hr {
-	overflow: visible;
-	padding: 0;
-	margin: 1rem auto;
-	border: none;
-	border-top: 1px solid transparent;
-	text-align: center;
-	width: 80%;
-}
-
-.hr::after {
-	content:" \00A7 ";
 	display: inline-block;
-	position: relative;
-	top: -0.75rem;
-	padding: 0 0.25rem;
+	min-width: 99%;
+	max-width: 100%;
+	width: calc((320px - 100%) * 320);
+	min-height: 100%;
+	padding: 0 0.2rem;
+	margin: 0.5rem auto;
+	overflow-wrap: break-word;
 }
 
-.image {
-	display: block;
-	font-family: sans-serif;
-	font-weight: 300;
-	height: auto;
-	line-height: 1;
-	position: relative;
-	text-align: center;
-	width: 100%;
+.wrapper > * {
+	margin-top: 0.75rem;
 }
 
-.image::before {
-	content: "Sorry, this image is unavailable.";
-	display: block;
-	margin-bottom: 8px;
+.wrapper > *,
+.wrapper > *::before,
+.wrapper > *::after {
+	padding: 0.5rem;
 }
-
-.image::after {
-	content: "(url: " attr(src) ")";
-	display: block;
-	font-size: 12px;
-}
-
-.form-cycles-num {
-	align-items: center;
-}
-
-
-/* https://htmlandcssguidebook.com/css/link-states/ */
-/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
-A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
-*/
 
 /* Buttons */
 .button {
-	--btn-HSL: hsl(337, 86%, 47%);
-	--btn-h: 337;
-	--btn-sat: 86%;
-	--btn-light: 47%;
-	--border-threshold: 5%;
+	--btn-HSL: hsl();
+	--btn-h: 240;
+	--btn-sat: 64%;
+	--btn-light: 27%;
 	--border-light: calc(var(--btn-light) * 0.7);
 	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
-	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
-	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
 	display: inline-block;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	align-self: start;
-	-khtml-transition: all 0.4s ease-in-out;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
-	-ms-transition: all 0.4s ease-in-out;
 	-o-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
 	margin: 2px 0;
 	border: 2px solid transparent;
-	border: 0.2rem solid var(--btn-border-colour);
+	border: 0.2em solid hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
 	-webkit-border-radius: 0.4rem;
 	-moz-border-radius: 0.4rem;
-	border-radius: var(--border-radius-value--medium);
+	border-radius: var(--border-radius-value);
 	box-shadow: var(--box-shadow1);
-	min-width: 12ch;
+	min-width: 10ch;
 	min-height: 44px;
-	max-width: 75%;
+	/* padding: 0.5rem 1rem; */
 	padding: 0.25em 0.75em;
-	margin-left: var(--padding-responsive--medium);
-	margin-right: var(--padding-responsive--ex-small);
-	margin-top: var(--padding-responsive--ex-small);
 	cursor: pointer;
 	color: inherit;
-	background-color: inherit;
-	background-color: var(--btn-background-colour);
-	outline: solid transparent;
+	background-color: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
+	/* background-color: inherit; */
+	outline: solid var(--theme-colour--complement);
 	font-size: inherit;
 	font-family: inherit;
 	font-weight: inherit;
@@ -816,11 +601,6 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:visited {
 	font-weight: bold;
-	outline-color: currentColor;
-	-moz-outline: 0.01rem dotted var(--theme-colour--complement);
-	outline: 0.01rem dotted var(--theme-colour--complement);
-	outline-offset: -0.5rem;
-	opacity: 0.5;
 }
 
 .button:focus {
@@ -831,27 +611,16 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:hover {
 	color: inherit;
-	border: 0.01rem solid var(--theme-colour--complement);
-	-webkit-border-radius: var(--border-radius-value--large);
-	-moz-border-radius: var(--border-radius-value--large);
-	border-radius: var(--border-radius-value--large);
-	background-color: lightgrey;
-	background-color: hsl(var(--btn-h), var(--btn-sat), -webkit-calc(var(--btn-light) * 1.30));
-	background-color: hsl(var(--btn-h), var(--btn-sat), -moz-calc(var(--btn-light) * 1.30));
-	background-color: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
+	border-color: inherit;
+	background-color: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 0.80));
+	opacity: 0.5;
 }
+
 
 .button:active {
 	color: inherit;
-	transform: translateY(8px);
+	transform: translateY(1px);
 	filter: saturate(150%);
-}
-
-.button[disabled] {
-	background-color: var(--dual-theme-grey);
-	opacity: 0.5;
-	cursor: not-allowed;
-	pointer-events: none;
 }
 
 .button__icon {
@@ -881,6 +650,18 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
   fill: currentColor;
 }
 
+/* Select */
+
+.select {
+	font-size: 16px;
+	font-size: max(16px, 1em);
+	font-family: inherit;
+	padding: 0.25em 0.5em;
+	background-color: var(--solarised-white);
+	border: 2px solid var(--input-border);
+	border-radius: var(--border-radius-value);
+}
+
 /* Inputs */
 
 .input {
@@ -897,10 +678,6 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	border-color: hsl(var(--input-focus-h), var(--input-focus-s), var(--input-focus-l));
 	box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
 	outline: 3px solid transparent;
-}
-
-.input:hover {
-	outline: 0.1rem solid var(--theme-colour--complement--split2);
 }
 
 .input:not(textarea) {
@@ -971,127 +748,13 @@ input[type="radio"]:focus,
 	outline-offset: max(2px, 0.15em);
 }
 
-/* Links */
-a, .link,
-a:link, .link:link,
-a:visited, .link:visited,
-a:focus, .link:focus,
-a:hover, .link:hover,
-a:active, .link:active {
-	position: relative;
-	padding: 0.35rem;
-  padding-bottom: 0.01rem;
-}
-
-a::after, .link::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: 0.01em;
-	height: 0.15em;
-	width: 100%;
-	background: linear-gradient(110deg, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
-	background: linear-gradient(110deg, var(--twelve-colour-combo));
-	transition: height 0.25s cubic-bezier(.6,0,.4,1);
-}
-
-/* Details / Accordion */
-.details .summary {
-	cursor: pointer;
-}
-
-.details > .summary::-webkit-details-marker {
-	display: none;
-}
-
-.details {
-	border: solid 0.1rem var(--accordion-border-colour);
-	border-radius: var(--border-radius-value);
-	box-shadow: var(--box-shadow1);
-}
-
-.details > .summary {
-	list-style: none;
-	border: solid 0.1rem var(--accordion-border-colour);
-	border-radius: var(--border-radius-value);
-	font-size: var(--fs0);
-	font-style: normal;
-	font-weight: 500;
-}
-
-.details > .summary:focus {
-	outline: none;
-}
-
-.details > .summary::before {
-	content: "";
-	display: inline-block;
-	width: 0.4rem;
-	height: 0.4rem;
-	border: solid 0.1rem var(--accordion-border-colour);
-	border-left-color: transparent;
-	border-bottom-color: transparent;
-	margin-right: 0.6rem;
-	transform: rotate(-45deg) translate(-20%, 20%);
-	transition: transform 0.3s;
-}
-
-.details[open] > .summary {
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
-	border-bottom-width: thin;
-}
-
-
-.details[open] > :not(.summary) {
-	border-left: solid 0.1rem var(--accordion-border-colour);
-	border-right: solid 0.1rem var(--accordion-border-colour);
-}
-
-
-.details[open] {
-	border-left: solid 0.1rem var(--accordion-border-colour);
-	border-right: solid 0.1rem var(--accordion-border-colour);
-	background: var(--colourPrimary--light-d);
-}
-
-.details[open] > :last-child {
-	border-bottom: solid 0.1rem var(--accordion-border-colour);
-	border-bottom-left-radius: 0.5rem;
-	border-bottom-right-radius: 0.5rem;
-}
-
-.details[open] > .summary::before {
-	transform: rotate(135deg) translate(-20%, 20%);
-}
-
-
 
 /* To hide */
-.hide-all {
+.hidden-all {
 	display: none;
 }
 
-.opacify {
-	opacity: 0;
-	pointer-events: none;
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-	position: absolute;
-}
-
-.invisible {
-	visibility: hidden;
-	pointer-events: none;
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-}
-
-.off-screen, .sr-only, .visually-hidden {
+.offscreen, .sr-only, .visually-hidden {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -1105,55 +768,19 @@ a::after, .link::after {
 	white-space: nowrap;
 }
 
-.scale-to-none {
-	transform: scale(0);
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-}
-
-/*-- End of classes --*/
 
 
-
-
-
-/* -------------------------------------- */
-/*              MEDIA QUERIES             */
-/* -------------------------------------- */
+/* ------------- */
+/* Media Queries */
+/* ------------- */
 /* Tablet portrait only */
-@media (min-width: 600px) and (max-width: 899px) {
-	:root {
-		--max-number-of-column: 1;
-		--breakpoint-size: 600;
-	}
-}
+@media (min-width: 600px) and (max-width: 899px) {}
 /* Tablet landscape only */
-@media (min-width: 900px) and (max-width: 1199px) {
-	:root {
-		--max-number-of-column: 1;
-		--breakpoint-size: 900;
-	}
-}
+@media (min-width: 900px) and (max-width: 1199px) {}
 /* Desktop only */
 @media (min-width: 1200px) and (max-width: 1799px) {}
 /* Big desktop upwards */
-@media (min-width: 1200px) {
-	:root {
-		--max-number-of-column: 1;
-		--breakpoint-size: 1200;
-	}
-
-	.wrapper {
-		min-width: 90%;
-	}
-
-	.main {
-		max-width: 80%;
-	}
-
-}
+@media (min-width: 1200px) {}
 
 /* Prevent scaling beyond this breakpoint */
 @media (min-width: 2560px) {

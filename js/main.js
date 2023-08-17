@@ -62,7 +62,7 @@ cyclesFormElement.addEventListener('submit', function handleCyclesFormSubmit(eve
 
   createDateInputs();
   cyclesFormElement.reset();
-  sectionCyclesNumElement.classList.toggle('hidden-all');
+  sectionCyclesNumElement.classList.toggle('hide-all');
   return cyclesNum;
 });
 
@@ -154,9 +154,10 @@ function handleDateSubmit() {
 
     calcMenstrualParameters(arrDayDiff, menstrualInfo);
     
-    sectionCyclesDatesElement.classList.toggle('hidden-all');
+    sectionCyclesDatesElement.classList.toggle('hide-all');
 
     generateTableResults(resultTableBodyElement, menstrualInfo);
+    sectionResultsElement.classList.toggle('hide-all');
   });
   
 }
