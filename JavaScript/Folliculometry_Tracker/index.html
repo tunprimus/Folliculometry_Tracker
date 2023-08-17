@@ -9,20 +9,26 @@
   <script type="module" src="./js/main.js" defer></script>
   <!-- <script type="module" src="./js/date-day-library.js" defer></script> -->
 </head>
-<body class="body">
-  <main class="main" id="main">
-    <div class="wrapper">
-      <h1 class="title">Folliculometry Tracker</h1>
-      <h2 class="h2">Your Menstrual Cycle Details</h2>
-      <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
+<body class="body container-fab-four">
+  <div class="wrapper">
+    <main class="main" id="main">
+      <header class="header">
+        <img src="./images/mainlogo.png" alt="logo" class="logo" width="317px" height="117px" loading="lazy">
+        <h1 class="h1 title">Folliculometry Tracker</h1>
+      </header>
+      <div class="intro">
+        <h2 class="h2">Your Menstrual Cycle Details</h2>
+        <img src="./images/MenstrualCycle2.png" alt="menstrual cycle chart" class="intro__image image" width="794px" height="1123px" loading="lazy">
+        <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
+      </div>
+      
       <div class="cycles-form-group">
-
         <!-- Choose number of cycles for calculation -->
         <section class="cycles-form-num" id="cycles-form-num">
           <h3 class="h3">Choose Number of Cycles</h3>
-          <form action="" class="form-cycles-num" id="form-cycles-num" data-form="form-cycles-num" aria-live="polite">
+          <form action="" class="form-cycles-num flex-pancake" id="form-cycles-num" data-form="form-cycles-num" aria-live="polite">
             <label for="cycles-num__select">Select number of start dates</label>
-            <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select select" required>
+            <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select select input" required>
               <option value="" disabled selected>Choose number</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -58,7 +64,7 @@
               </li>
             </ul>
             <button type="submit" class="cycles-date__submit button" id="cycles-date__submit">Continue</button>
-            <button type="reset" class="cycles-date__reset offscreen button" id="cycles-date__reset">Reset</button>
+            <button type="reset" class="cycles-date__reset invisible button" id="cycles-date__reset">Reset</button>
           </form>
         </section>
       </div>
@@ -68,9 +74,9 @@
       <div class="results-charts" aria-live="polite">
 
         <!-- Results -->
-        <section class="results xhidden-all" id="results" data-result="results">
+        <section class="results hide-all" id="results" data-result="results">
           <table class="result-table" id="result-table" data-result="result-table">
-            <caption><h3>Menstrual Cycle Calculation Results</h3></caption>
+            <caption><h3 class="h3">Menstrual Cycle Calculation Results</h3></caption>
             <thead class="result-table__head">
               <tr>
                 <th>Description</th>
@@ -126,7 +132,7 @@
         <!-- Charts -->
         <section class="charts hidden-all" id="charts" data-results="charts"></section>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </body>
 </html>
