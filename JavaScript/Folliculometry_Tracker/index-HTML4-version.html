@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folliculometry Tracker</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="module" src="./js/main.js" defer></script>
+  <!-- <script type="module" src="./js/date-day-library.js" defer></script> -->
+</head>
+<body class="body container-fab-four">
+  <div class="wrapper">
+    <div class="main" id="main">
+      <div class="header">
+        <img src="./images/mainlogo.png" alt="logo" class="logo" width="317px" height="117px" loading="lazy">
+        <h1 class="h1 title">Folliculometry Tracker</h1>
+      </div>
+      <div class="intro">
+        <h2 class="h2">Your Menstrual Cycle Details</h2>
+        <img src="./images/MenstrualCycle2.png" alt="menstrual cycle chart" class="intro__image image" width="794px" height="1123px" loading="lazy">
+        <p>The higher the number of cycles given, the more accurate the result will be. It is usually advised to add at least seven (7) or more start dates; translating to six (6) cycles for the calculations.</p>
+      </div>
+      
+      <div class="cycles-form-group">
+        <!-- Choose number of cycles for calculation -->
+        <div class="section cycles-form-num" id="cycles-form-num">
+          <h3 class="h3">Choose Number of Cycles</h3>
+          <form action="" class="form-cycles-num flex-pancake" id="form-cycles-num" data-form="form-cycles-num" aria-live="polite">
+            <label for="cycles-num__select">Select number of start dates</label>
+            <select name="cycles-num__select" id="cycles-num__select" class="cycles-num__select select input" required>
+              <option value="" disabled selected>Choose number</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+            <input type="submit" value="Confirm" class="cycles-num__submit button" id="cycles-num__submit">
+          </form>
+        </div>
+        <br>
+
+        <!-- Input calendar dates to be used in the calculation -->
+        <div class="section cycles-form-date" id="cycles-form-date">
+          <h3 class="h3">Click the Start Dates on the Calendar</h3>
+          <form action="" class="form-cycles-date" id="form-cycles-date" data-form="form-cycles-date" aria-live="polite">
+            <ul class="cycles-date-list" id="cycles-date-list" data-date="cycles-date-list">
+              <!-- 1st default -->
+              <li class="cycles-date__item" id="cycles-date__item-1">
+                <label for="cycles-date__input-1">Start date-1:</label>
+                <input type="date" name="flowstart-1" class="cycles-date__input input" id="cycles-date__input-1" data-date="flowstart" required>
+              </li>
+              <!-- 2nd default -->
+              <li class="cycles-date__item" id="cycles-date__item-2">
+                <label for="cycles-date__input-2">Start date-2:</label>
+                <input type="date" name="flowstart-2" class="cycles-date__input input" id="cycles-date__input-2" data-date="flowstart" required>
+              </li>
+            </ul>
+            <button type="submit" class="cycles-date__submit button" id="cycles-date__submit">Continue</button>
+            <button type="reset" class="cycles-date__reset invisible button" id="cycles-date__reset">Reset</button>
+          </form>
+        </div>
+      </div>
+      <br>
+
+      <!-- Results and Charts -->
+      <div class="results-charts" aria-live="polite">
+
+        <!-- Results -->
+        <div class="section results hide-all" id="results" data-result="results">
+          <table class="result-table" id="result-table" data-result="result-table">
+            <caption><h3 class="h3">Menstrual Cycle Calculation Results</h3></caption>
+            <thead class="result-table__head">
+              <tr>
+                <th>Description</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody class="result-table__body">
+              <tr>
+                <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td>
+                <td class="result-table__value" data-label="Number of cycles: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td>
+                <td class="result-table__value" data-label="Last Menstrual Period: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td>
+                <td class="result-table__value" data-label="Longest cycle length: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td>
+                <td class="result-table__value" data-label="Shortest cycle length: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td>
+                <td class="result-table__value" data-label="Averaged cycle length: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td>
+                <td class="result-table__value" data-label="Longest day of ovulation: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td>
+                <td class="result-table__value" data-label="Shortest day of ovulation: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td>
+                <td class="result-table__value" data-label="Average day of ovulation: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td>
+                <td class="result-table__value" data-label="Predicted Ovulation Date: ">{Your result}</td>
+              </tr>
+              <tr>
+                <td class="result-table__desc" data-label="Ovulated?: "></td>
+                <td class="result-table__value alert-message" data-label="Ovulated?: ">{Your result}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+
+        <!-- Charts -->
+        <div class="section charts hidden-all" id="charts" data-results="charts"></div>
+      </div>
+    </d>
+  </div>
+</body>
+</html>
