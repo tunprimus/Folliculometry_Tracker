@@ -650,6 +650,7 @@ progress {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: stretch;
+	align-content: flex-start;
 	padding-bottom: var(--padding-responsive);
 }
 
@@ -772,9 +773,9 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
 	display: inline-block;
 	display: inline-flex;
-	align-items: center;
 	justify-content: center;
-	align-self: start;
+	align-items: center;
+	align-self: flex-start;
 	-khtml-transition: all 0.4s ease-in-out;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
