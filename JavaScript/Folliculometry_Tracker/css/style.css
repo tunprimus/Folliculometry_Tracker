@@ -770,6 +770,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
 	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
 	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
+	--btn-background-colour--hover: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
 	display: inline-block;
 	display: inline-flex;
 	justify-content: center;
@@ -806,6 +807,12 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	text-align: center;
 	text-decoration: none;
 	line-height: 1.1;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	vertical-align: middle;
 	white-space: nowrap;
 }
 
@@ -830,15 +837,16 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 }
 
 .button:hover {
-	color: inherit;
 	border: 0.01rem solid var(--theme-colour--complement);
 	-webkit-border-radius: var(--border-radius-value--large);
 	-moz-border-radius: var(--border-radius-value--large);
 	border-radius: var(--border-radius-value--large);
-	background-color: lightgrey;
-	background-color: hsl(var(--btn-h), var(--btn-sat), -webkit-calc(var(--btn-light) * 1.30));
-	background-color: hsl(var(--btn-h), var(--btn-sat), -moz-calc(var(--btn-light) * 1.30));
-	background-color: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
+	color: inherit;
+	outline-color: var(--dual-theme-grey);
+	outline-color: currentColor;
+	outline-color: var(--theme-colour--complement);
+	background-color: inherit;
+	background-color: var(--btn-background-colour--hover);
 }
 
 .button:active {
