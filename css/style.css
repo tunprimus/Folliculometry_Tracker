@@ -845,7 +845,7 @@ input[type="radio"]::before,
 	border-radius: 50%;
 	transform: scale(0);
 	transition: 120ms transform ease-in-out;
-	box-shadow: inset 1em 1em var(--form-control-color);
+	box-shadow: inset 1em 1em var(--form-control-colour);
 	background-color: CanvasText;
 }
 
