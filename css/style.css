@@ -874,6 +874,10 @@ input[type="radio"]:focus,
 	max-width: 100%;
 }
 
+.input[type="date"]::-webkit-calendar-picker-indicator {
+	font-size: 3rem;
+}
+
 /* https://htmlandcssguidebook.com/css/link-states/ */
 /* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
 A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
