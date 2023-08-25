@@ -5,7 +5,8 @@ import addDaysToDate from './date-day-library.js';
 import subDaysFromDate from './date-day-library.js';
  */
 
-import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInDays, differenceInCalendarDays }  from './date-day-library.js';
+import { geometricMeanLogReduce }  from './geometric_mean.js';
+import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInCalendarDays }  from './date-day-library.js';
 
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
