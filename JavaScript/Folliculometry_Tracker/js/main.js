@@ -152,7 +152,7 @@ function handleDateSubmit() {
     let arrDayDiff = getDayDiff();
     menstrualInfo.numCyclesGiven = arrDayDiff.length;
     datesResetButtonElement.click();
-
+    // console.log(arrDayDiff);
     calcMenstrualParameters(arrDayDiff, menstrualInfo);
     
     sectionCyclesDatesElement.classList.toggle('hide-all');
