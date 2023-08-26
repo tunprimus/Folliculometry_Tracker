@@ -1,7 +1,7 @@
 /* Inspired from Animating from “display: block” to “display: none”
 - +++>>> https://www.impressivewebs.com/animate-display-block-none/ */
 
-export const displayNoneToBlockAnimator = (target, activator, displayNoneClassName, visuallyHiddenClassName) => {
+const displayNoneToBlockAnimator = (target, activator, displayNoneClassName, visuallyHiddenClassName) => {
   activator.addEventListener('click', () => {
     if (target.classList.contains(displayNoneClassName)) {
       target.classList.remove(displayNoneClassName);
@@ -20,3 +20,5 @@ export const displayNoneToBlockAnimator = (target, activator, displayNoneClassNa
     }
   }, false);
 };
+
+export { displayNoneToBlockAnimator };

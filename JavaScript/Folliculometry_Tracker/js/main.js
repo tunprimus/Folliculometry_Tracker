@@ -5,6 +5,7 @@ import addDaysToDate from './date-day-library.js';
 import subDaysFromDate from './date-day-library.js';
  */
 
+import { displayNoneToBlockAnimator } from './animate-display-none.js';
 import { geometricMeanLogReduce }  from './geometric_mean.js';
 import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInCalendarDays }  from './date-day-library.js';
 
