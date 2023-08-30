@@ -20,7 +20,7 @@ function geometricMeanForLoop(array, num) {
   return geoMean;
 } */
 
-function geometricMeanDirectReduce(array) {
+function geometricMeanDirectReduce(array, storeObj = null) {
   let product = array.reduce((accumulator, currentValue) => {
     return accumulator * currentValue;
   }, 1);
@@ -43,7 +43,7 @@ function geometricMeanLog(array, num) {
   return Math.exp(avgSum);
 } */
 
-function geometricMeanLogReduce(array) {
+function geometricMeanLogReduce(array, storeObj = null) {
   let avgSum = array.reduce((accumulator, currentValue, currentIndex, arr) => {
     return (accumulator + Math.log(array[currentIndex]) / arr.length);
   }, 0);

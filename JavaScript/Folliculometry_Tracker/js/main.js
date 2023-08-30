@@ -16,7 +16,7 @@ const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 
 let cyclesNum;
-const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', shortestCycleLength: '', averageCycleLength: '', longestDayOvulation: '', shortestDayOvulation: '', averageDayOvulation: '', predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
+const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
 const datesCollectorArray = [];
 let numCyclesGiven;
 let dateLMP;
@@ -166,6 +166,9 @@ function handleDateSubmit() {
 // Process the date inputs
 
 function longestCycleLengthCalc (dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   const arrLen = dayDiffArr.length;
   longestCycleLength = Math.max(...dayDiffArr);
   
@@ -180,6 +183,9 @@ function longestCycleLengthCalc (dayDiffArr, infoObj) {
 }
 
 function shortestCycleLengthCalc(dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   const arrLen = dayDiffArr.length;
   shortestCycleLength = Math.min(...dayDiffArr);
   
@@ -194,6 +200,9 @@ function shortestCycleLengthCalc(dayDiffArr, infoObj) {
 }
 
 function averageCycleLengthCalc(dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
   
   infoObj.averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
@@ -202,6 +211,9 @@ function averageCycleLengthCalc(dayDiffArr, infoObj) {
 }
 
 function longestDayToOvulateCalc(dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   const arrLen = dayDiffArr.length;
   longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
   
@@ -216,6 +228,9 @@ function longestDayToOvulateCalc(dayDiffArr, infoObj) {
 }
 
 function shortestDayToOvulateCalc(dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   const arrLen = dayDiffArr.length;
   shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
 
@@ -263,6 +278,9 @@ function determineOvulationDate(infoObj) {
 }
 
 function calcMenstrualParameters(dayDiffArr, infoObj) {
+  if (!Array.isArray(dayDiffArr)) {
+    return;
+  }
   longestCycleLengthCalc (dayDiffArr, infoObj);
   shortestCycleLengthCalc(dayDiffArr, infoObj);
   averageCycleLengthCalc(dayDiffArr, infoObj);
@@ -280,7 +298,7 @@ function generateTableResults(tbodyDom, infoObj) {
     return;
   }
   const newInnerHTML = `
-    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: "> ${infoObj.longestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: "> ${infoObj.averageCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: "> Day ${infoObj.longestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: "> Day ${infoObj.shortestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value" data-label="Average day of ovulation: "> Day ${infoObj.averageDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td> </tr>
+    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: "> ${infoObj.longestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: "> ${infoObj.averageCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: "> Day ${infoObj.longestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: "> Day ${infoObj.shortestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value alert" data-label="Average day of ovulation: "> Day ${infoObj.averageDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value warning" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td> </tr>
   `;
   
   tbodyDom.innerHTML = '';
