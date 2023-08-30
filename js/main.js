@@ -6,6 +6,7 @@ import subDaysFromDate from './date-day-library.js';
  */
 
 import { geometricMeanLogReduce }  from './geometric_mean.js';
+import { arithmeticGeometricMean } from './arithmeticGeometricMean.js';
 import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInCalendarDays }  from './date-day-library.js';
 
 // Declare variables and constants
@@ -21,6 +22,8 @@ const datesCollectorArray = [];
 let numCyclesGiven;
 let dateLMP;
 let dateLMPStr = '';
+let aMean = 0;
+let gMean = 0;
 let longestCycleLength = 0;
 let shortestCycleLength = 0;
 let averageCycleLength = 0;
@@ -173,10 +176,12 @@ function longestCycleLengthCalc (dayDiffArr, infoObj) {
   longestCycleLength = Math.max(...dayDiffArr);
   
   infoObj.longestCycleLength = Math.max(...dayDiffArr);
+  infoObj.longestCycleLengthStr = `${infoObj.longestCycleLength} days`;
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
     infoObj.longestCycleLength = '';
+    infoObj.longestCycleLengthStr = '';
   }
   
   return infoObj;
@@ -190,10 +195,12 @@ function shortestCycleLengthCalc(dayDiffArr, infoObj) {
   shortestCycleLength = Math.min(...dayDiffArr);
   
   infoObj.shortestCycleLength = Math.min(...dayDiffArr);
+  infoObj.shortestCycleLengthStr = `${infoObj.shortestCycleLength} days`;
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
     infoObj.shortestCycleLength = '';
+    infoObj.shortestCycleLengthStr = '';
   }
   
   return infoObj;
@@ -203,9 +210,14 @@ function averageCycleLengthCalc(dayDiffArr, infoObj) {
   if (!Array.isArray(dayDiffArr)) {
     return;
   }
-  averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
+  let ariGeoMean = null;
+  aMean = dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0);
+  gMean = geometricMeanLogReduce(dayDiffArr);
+  ariGeoMean = arithmeticGeometricMean(aMean, gMean);
   
-  infoObj.averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
+  averageCycleLength = Math.round(ariGeoMean);
+  infoObj.averageCycleLength = Math.round(ariGeoMean);
+  infoObj.averageCycleLengthStr = `${infoObj.averageCycleLength} days`;
 
   return infoObj;
 }
@@ -218,10 +230,12 @@ function longestDayToOvulateCalc(dayDiffArr, infoObj) {
   longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
   
   infoObj.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
+  infoObj.longestDayOvulationStr = `Day ${infoObj.longestDayOvulation}`;
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
     infoObj.longestDayOvulation = '';
+    infoObj.longestDayOvulationStr = '';
   }
 
   return infoObj;
@@ -235,10 +249,12 @@ function shortestDayToOvulateCalc(dayDiffArr, infoObj) {
   shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
 
   infoObj.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
+  infoObj.shortestDayOvulationStr = `Day ${infoObj.shortestDayOvulation}`;
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
     infoObj.shortestDayOvulation = '';
+    infoObj.shortestDayOvulationStr = '';
   }
 
   return infoObj;
@@ -248,6 +264,7 @@ function averageDayToOvulateCalc(dayDiffArr, infoObj) {
   averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
 
   infoObj.averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
+  infoObj.averageDayOvulationStr = `Day ${infoObj.averageDayOvulation}`;
 
   return infoObj;
 }
@@ -298,7 +315,7 @@ function generateTableResults(tbodyDom, infoObj) {
     return;
   }
   const newInnerHTML = `
-    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: "> ${infoObj.longestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: "> ${infoObj.averageCycleLength} days</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: "> Day ${infoObj.longestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: "> Day ${infoObj.shortestDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value alert" data-label="Average day of ovulation: "> Day ${infoObj.averageDayOvulation}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value warning" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td> </tr>
+    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: "> ${infoObj.longestCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: "> ${infoObj.averageCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: "> ${infoObj.longestDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: "> ${infoObj.shortestDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value alert" data-label="Average day of ovulation: "> ${infoObj.averageDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value warning" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td> </tr>
   `;
   
   tbodyDom.innerHTML = '';
