@@ -165,11 +165,11 @@ function handleDateSubmit() {
 
 // Process the date inputs
 
-function longestCycleLengthCalc (datesArray, infoObj) {
-  const arrLen = datesArray.length;
-  longestCycleLength = Math.max(...datesArray);
+function longestCycleLengthCalc (dayDiffArr, infoObj) {
+  const arrLen = dayDiffArr.length;
+  longestCycleLength = Math.max(...dayDiffArr);
   
-  infoObj.longestCycleLength = Math.max(...datesArray);
+  infoObj.longestCycleLength = Math.max(...dayDiffArr);
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
@@ -179,11 +179,11 @@ function longestCycleLengthCalc (datesArray, infoObj) {
   return infoObj;
 }
 
-function shortestCycleLengthCalc(datesArray, infoObj) {
-  const arrLen = datesArray.length;
-  shortestCycleLength = Math.min(...datesArray);
+function shortestCycleLengthCalc(dayDiffArr, infoObj) {
+  const arrLen = dayDiffArr.length;
+  shortestCycleLength = Math.min(...dayDiffArr);
   
-  infoObj.shortestCycleLength = Math.min(...datesArray);
+  infoObj.shortestCycleLength = Math.min(...dayDiffArr);
 
   // Comparison only if there are 2 or more cycles
   if (arrLen < 2) {
@@ -193,16 +193,16 @@ function shortestCycleLengthCalc(datesArray, infoObj) {
   return infoObj;
 }
 
-function averageCycleLengthCalc(datesArray, infoObj) {
-  averageCycleLength = Math.round(datesArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
+function averageCycleLengthCalc(dayDiffArr, infoObj) {
+  averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
   
-  infoObj.averageCycleLength = Math.round(datesArray.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
+  infoObj.averageCycleLength = Math.round(dayDiffArr.reduce((avg, value, _, arr) => avg + (value / arr.length), 0));
 
   return infoObj;
 }
 
-function longestDayToOvulateCalc(datesArray, infoObj) {
-  const arrLen = datesArray.length;
+function longestDayToOvulateCalc(dayDiffArr, infoObj) {
+  const arrLen = dayDiffArr.length;
   longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
   
   infoObj.longestDayOvulation = longestCycleLength - LUTEAL_PHASE_LENGTH;
@@ -215,8 +215,8 @@ function longestDayToOvulateCalc(datesArray, infoObj) {
   return infoObj;
 }
 
-function shortestDayToOvulateCalc(datesArray, infoObj) {
-  const arrLen = datesArray.length;
+function shortestDayToOvulateCalc(dayDiffArr, infoObj) {
+  const arrLen = dayDiffArr.length;
   shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
 
   infoObj.shortestDayOvulation = shortestCycleLength - LUTEAL_PHASE_LENGTH;
@@ -229,7 +229,7 @@ function shortestDayToOvulateCalc(datesArray, infoObj) {
   return infoObj;
 }
 
-function averageDayToOvulateCalc(datesArray, infoObj) {
+function averageDayToOvulateCalc(dayDiffArr, infoObj) {
   averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
 
   infoObj.averageDayOvulation = averageCycleLength - LUTEAL_PHASE_LENGTH;
@@ -262,13 +262,13 @@ function determineOvulationDate(infoObj) {
   return infoObj;
 }
 
-function calcMenstrualParameters(datesArray, infoObj) {
-  longestCycleLengthCalc (datesArray, infoObj);
-  shortestCycleLengthCalc(datesArray, infoObj);
-  averageCycleLengthCalc(datesArray, infoObj);
-  longestDayToOvulateCalc(datesArray, infoObj);
-  shortestDayToOvulateCalc(datesArray, infoObj);
-  averageDayToOvulateCalc(datesArray, infoObj);
+function calcMenstrualParameters(dayDiffArr, infoObj) {
+  longestCycleLengthCalc (dayDiffArr, infoObj);
+  shortestCycleLengthCalc(dayDiffArr, infoObj);
+  averageCycleLengthCalc(dayDiffArr, infoObj);
+  longestDayToOvulateCalc(dayDiffArr, infoObj);
+  shortestDayToOvulateCalc(dayDiffArr, infoObj);
+  averageDayToOvulateCalc(dayDiffArr, infoObj);
   determineOvulationDate(infoObj);
   return infoObj;
 }
