@@ -315,7 +315,46 @@ function generateTableResults(tbodyDom, infoObj) {
     return;
   }
   const newInnerHTML = `
-    <tr> <td class="result-table__desc" data-label="Number of cycles: ">Number of cycles: </td> <td class="result-table__value" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td> </tr> <tr> <td class="result-table__desc" data-label="Last Menstrual Period: ">Last Menstrual Period: </td> <td class="result-table__value" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest cycle length: ">Longest cycle length: </td> <td class="result-table__value" data-label="Longest cycle length: "> ${infoObj.longestCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest cycle length: ">Shortest cycle length: </td> <td class="result-table__value" data-label="Shortest cycle length: ">${infoObj.shortestCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Averaged cycle length: ">Averaged cycle length: </td> <td class="result-table__value" data-label="Averaged cycle length: "> ${infoObj.averageCycleLengthStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Longest day of ovulation: ">Longest day of ovulation: </td> <td class="result-table__value" data-label="Longest day of ovulation: "> ${infoObj.longestDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td> <td class="result-table__value" data-label="Shortest day of ovulation: "> ${infoObj.shortestDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Average day of ovulation: ">Average day of ovulation: </td> <td class="result-table__value alert" data-label="Average day of ovulation: "> ${infoObj.averageDayOvulationStr}</td> </tr> <tr> <td class="result-table__desc" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td> <td class="result-table__value warning" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td> </tr> <tr> <td class="result-table__desc" data-label="Ovulated?: "></td> <td class="result-table__value alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td> </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Number of cycles: ">Number of cycles: </td>
+      <td class="result-table__value table__cell" data-label="Number of cycles: "> ${infoObj.numCyclesGiven}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Last Menstrual Period: ">Last Menstrual Period: </td>
+      <td class="result-table__value table__cell" data-label="Last Menstrual Period: "> ${infoObj.dateLMPStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Longest cycle length: ">Longest cycle length: </td>
+      <td class="result-table__value table__cell" data-label="Longest cycle length: "> ${infoObj.longestCycleLengthStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Shortest cycle length: ">Shortest cycle length: </td>
+      <td class="result-table__value table__cell" data-label="Shortest cycle length: ">${infoObj.shortestCycleLengthStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Averaged cycle length: ">Averaged cycle length: </td>
+      <td class="result-table__value table__cell" data-label="Averaged cycle length: "> ${infoObj.averageCycleLengthStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Longest day of ovulation: ">Longest day of ovulation: </td>
+      <td class="result-table__value table__cell" data-label="Longest day of ovulation: "> ${infoObj.longestDayOvulationStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Shortest day of ovulation: ">Shortest day of ovulation: </td>
+      <td class="result-table__value table__cell" data-label="Shortest day of ovulation: "> ${infoObj.shortestDayOvulationStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Average day of ovulation: ">Average day of ovulation: </td>
+      <td class="result-table__value table__cell alert" data-label="Average day of ovulation: "> ${infoObj.averageDayOvulationStr}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Predicted Ovulation Date: ">Predicted Ovulation Date: </td>
+      <td class="result-table__value table__cell warning result-table__value--predicted" data-label="Predicted Ovulation Date: "> <strong>${infoObj.predictedOvulationDateStr}</strong></td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Ovulated?: "></td>
+      <td class="result-table__value table__cell alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td>
+    </tr>
   `;
   
   tbodyDom.innerHTML = '';
