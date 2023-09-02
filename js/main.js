@@ -1,10 +1,4 @@
-
-/* 
-import differenceInDays from './date-day-library.js';
-import addDaysToDate from './date-day-library.js';
-import subDaysFromDate from './date-day-library.js';
- */
-
+'use strict';
 import { geometricMeanLogReduce }  from './geometric_mean.js';
 import { arithmeticGeometricMean } from './arithmeticGeometricMean.js';
 import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInCalendarDays }  from './date-day-library.js';
@@ -38,13 +32,13 @@ let currentCycleEndDate;
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
 const sectionCyclesDatesElement = document.querySelector('#cycles-form-date');
 const cyclesFormElement = document.querySelector('#form-cycles-num');
-// const cyclesSelectElement = document.querySelector('#cycles-num__select');
+const cyclesFormSubmitButtonElement = document.querySelector('#cycles-num__submit');
 const datesFormElement = document.querySelector('#form-cycles-date');
 const dateListElement = document.querySelector('#cycles-date-list');
+const datesFormSubmitButtonElement = document.querySelector('#cycles-date__submit');
 const datesResetButtonElement = document.querySelector('#cycles-date__reset');
 const sectionResultsElement = document.querySelector('#results');
 const resultTableBodyElement = document.querySelector('.result-table__body');
-// console.log(resultTableBodyElement);
 const resultCellsElements = document.querySelectorAll('.result-table__value');
 const sectionChartsElement = document.querySelector('#charts');
 const resultsElement = document.querySelector('#calc-result');
