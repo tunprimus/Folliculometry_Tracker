@@ -679,6 +679,10 @@ progress {
 	padding-bottom: var(--padding-responsive);
 }
 
+.intro__text {
+	margin-bottom: var(--padding-responsive);
+}
+
 .h1 {
 	font-size: var(--fs5);
 	font-weight: bold;
@@ -730,6 +734,8 @@ progress {
 
 .image {
 	display: block;
+	margin-right: auto;
+	margin-left: auto;
 	font-family: sans-serif;
 	font-weight: 300;
 	height: auto;
@@ -737,6 +743,7 @@ progress {
 	position: relative;
 	text-align: center;
 	width: 100%;
+	max-width: 50vh;
 }
 
 .image::before {
@@ -1066,7 +1073,7 @@ a::after, .link::after {
 	/* padding-left: 2rem;
 	padding-right: 2rem; */
 	border: 0.25rem solid hsl(337, 86%, 47%);
-	border-radius: var(--border-radius-value--large);
+	border-radius: var(--border-radius-value);
 }
 
 .table__caption {
@@ -1140,6 +1147,7 @@ a::after, .link::after {
 .footer {
   width: 100%;
   text-align: center;
+	margin-bottom: var(--layout-gap-lg);
 }
 
 .footer__item {
@@ -1317,6 +1325,11 @@ a::after, .link::after {
 	}
 	.result-table__desc {
 		font-size: 0.9rem;
+	}
+	.result-table__value {
+		padding-left: var(--padding-responsive--small);
+		padding-right: var(--padding-responsive--small);
+
 	}
 }
 
