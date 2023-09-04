@@ -1136,6 +1136,20 @@ a::after, .link::after {
 	outline-offset: -3px;
 }
 
+/* Footer */
+.footer {
+  width: 100%;
+  text-align: center;
+}
+
+.footer__item {
+	width: 100%;
+  padding-left: var(--padding-responsive, 0.95rem);
+	padding-right: var(--padding-responsive, 0.95rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
 /* Details / Accordion */
 .details .summary {
 	cursor: pointer;
