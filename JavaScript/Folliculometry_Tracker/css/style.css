@@ -743,7 +743,6 @@ progress {
 	position: relative;
 	text-align: center;
 	width: 100%;
-	max-width: 50vh;
 }
 
 .image::before {
@@ -756,6 +755,21 @@ progress {
 	content: "(url: " attr(src) ")";
 	display: block;
 	font-size: 12px;
+}
+
+.image__attribution {
+	font-size: 0.5rem;
+	line-height: 0.9;
+	letter-spacing: 0.1em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: var(--padding-responsive);
+	overflow: hidden;
+}
+
+.intro__image {
+	max-width: 50vh;
+	background-color: white;
 }
 
 .form-cycles-num {
@@ -1041,18 +1055,41 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 }
 
 /* Links */
-a, .link,
-a:link, .link:link,
-a:visited, .link:visited,
-a:focus, .link:focus,
-a:hover, .link:hover,
-a:active, .link:active {
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
 	position: relative;
 	padding: 0.35rem;
   padding-bottom: 0.01rem;
 }
 
-a::after, .link::after {
+a::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0.01em;
+	height: 0.15em;
+	width: 100%;
+	background: linear-gradient(110deg, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	background: linear-gradient(110deg, var(--twelve-colour-combo));
+	transition: height 0.25s cubic-bezier(.6,0,.4,1);
+}
+
+.link,
+.link:link,
+.link:visited,
+.link:focus,
+.link:hover,
+.link:active {
+	position: relative;
+	padding: 0.35rem;
+  padding-bottom: 0.01rem;
+}
+
+.link::after {
 	content: "";
 	position: absolute;
 	left: 0;
