@@ -782,6 +782,10 @@ progress {
 	margin-bottom: var(--padding-responsive);
 }
 
+.intro__image-demo--2nd {
+	min-height: 50vw;
+}
+
 .form-cycles-num {
 	align-self: center;
 	align-items: center;
