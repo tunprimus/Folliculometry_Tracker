@@ -768,8 +768,18 @@ progress {
 }
 
 .intro__image {
-	max-width: 50vh;
+	max-width: 50vw;
 	background-color: white;
+}
+
+.intro__image-demo {
+	width: unset;
+	max-height: 50%;
+	min-height: 30vh;
+	object-fit: center;
+	border: 0.1rem solid var(--dual-theme-grey);
+	border-radius: var(--border-radius-value);
+	margin-bottom: var(--padding-responsive);
 }
 
 .form-cycles-num {
