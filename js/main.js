@@ -295,14 +295,13 @@ function determineOvulationDate(infoObj) {
   return infoObj;
 }
 
-/* 
+
 function hormonalSampleDateCalc(infoObj) {
   let collectDate;
   
-  let indexLMPStr = infoObj.dateLMPStr;
+  let indexLMP = new Date(infoObj.dateLMP);
   
   let aggCycLen = infoObj.averageCycleLength;
-  let aggCycEndDate = infoObj.currentCycleEndDate;
   
   if (!aggCycLen) {
     return;
@@ -336,7 +335,7 @@ function hormonalSampleDateCalc(infoObj) {
 
   return infoObj;
 }
- */
+
 function calcMenstrualParameters(dayDiffArr, infoObj) {
   if (!Array.isArray(dayDiffArr)) {
     return;
@@ -348,7 +347,7 @@ function calcMenstrualParameters(dayDiffArr, infoObj) {
   shortestDayToOvulateCalc(dayDiffArr, infoObj);
   averageDayToOvulateCalc(dayDiffArr, infoObj);
   determineOvulationDate(infoObj);
-  // hormonalSampleDateCalc(infoObj);
+  hormonalSampleDateCalc(infoObj);
   return infoObj;
 }
 
