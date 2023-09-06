@@ -136,7 +136,7 @@ function addDaysToDate(bufDate, bufDays) {
     return;
   }
 
-  let toUseDate = bufDate;
+  let toUseDate = new Date(bufDate);
   let toUseAmount = bufDays;
 
   if (isNaN(toUseAmount)) {
@@ -156,7 +156,7 @@ function subDaysFromDate(bufDate, bufDays) {
     return;
   }
 
-  let toUseDate = bufDate;
+  let toUseDate = new Date(bufDate);
   let toUseAmount = bufDays;
 
   if (isNaN(toUseAmount)) {
@@ -173,8 +173,8 @@ function subDaysFromDate(bufDate, bufDays) {
 
 function differenceInDays(bufDateLeft, bufDateRight) {
   if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
-    const dateLeft = bufDateLeft;
-    const dateRight = bufDateRight;
+    const dateLeft = new Date(bufDateLeft)
+    const dateRight = new Date(bufDateRight);
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
@@ -188,8 +188,8 @@ function differenceInDays(bufDateLeft, bufDateRight) {
 
 function differenceInCalendarDays(bufDateLeft, bufDateRight) {
   if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
-    const dateLeft = bufDateLeft;
-    const dateRight = bufDateRight;
+    const dateLeft = new Date(bufDateLeft)
+    const dateRight = new Date(bufDateRight);
     const timestampLeft = dateLeft.getTime();
     const timestampRight = dateRight.getTime();
     // One day in milliseconds
