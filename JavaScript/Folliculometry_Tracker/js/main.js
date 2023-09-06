@@ -6,15 +6,19 @@ import { compareLocalAsc, addDaysToDate, subDaysFromDate, differenceInCalendarDa
 // Declare variables and constants
 const LUTEAL_PHASE_LENGTH = 14;
 const MENSES_SHIFT = 1; // Because there is no day 0 on the menstrual cycle
+const SHORT_CYCLE_SAMPLE_DAY = 19;
+const NORMAL_CYCLE_SAMPLE_DAY = 21;
+const LONG_CYCLE_SAMPLE_DAY = 23;
+const EXTRA_LONG_CYCLE_SAMPLE_DAY = 'Random day collection';
 // const dateLocales = undefined;
 const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 
 let cyclesNum;
-const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '',};
+const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '', hormonalSampleDayType: '', hormonalSampleDate: '', hormonalSampleDateStr: '',};
 const datesCollectorArray = [];
 let numCyclesGiven;
-let dateLMP;
+let curDateLMP;
 let dateLMPStr = '';
 let aMean = 0;
 let gMean = 0;
@@ -27,6 +31,8 @@ let averageDayOvulation = 0;
 let predictedOvulationDate;
 let predictedOvulationDateStr = '';
 let alreadyOvulated = '';
+let hormonalSampleDate;
+let hormonalSampleDateStr = '';
 let currentCycleEndDate;
 
 const sectionCyclesNumElement = document.querySelector('#cycles-form-num');
@@ -113,12 +119,13 @@ function handleDateSubmit() {
       }
       let lastItem = datesArray.slice(-1)[0];
       
-      dateLMP = lastItem;
+      curDateLMP = lastItem;
       
-      menstrualInfo.dateLMP = dateLMP;
-      dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
-      menstrualInfo.dateLMPStr = dateLMP.toLocaleString(dateLocales, dateOptions);
-      return dateLMP, dateLMPStr;
+      menstrualInfo.dateLMP = curDateLMP;
+      dateLMPStr = curDateLMP.toLocaleString(dateLocales, dateOptions);
+      menstrualInfo.dateLMPStr = curDateLMP.toLocaleString(dateLocales, dateOptions);
+      // return curDateLMP, dateLMPStr;
+      return menstrualInfo;
     }
 
     function extractDate() {
@@ -284,6 +291,48 @@ function determineOvulationDate(infoObj) {
   predictedOvulationDateStr = predictedDate.toLocaleString(dateLocales, dateOptions);
 
   infoObj.predictedOvulationDateStr = predictedDate.toLocaleString(dateLocales, dateOptions);
+  
+  return infoObj;
+}
+
+function hormonalSampleDateCalc(infoObj) {
+  let collectDate;
+  
+  let indexLMPStr = infoObj.dateLMPStr;
+  console.log(indexLMPStr);
+  console.log(infoObj.dateLMPStr);
+  let aggCycLen = infoObj.averageCycleLength;
+  let aggCycEndDate = infoObj.currentCycleEndDate;
+  
+  if (!aggCycLen) {
+    return;
+  }
+
+  if (infoObj.alreadyOvulated) {
+    infoObj.hormonalSampleDateStr = EXTRA_LONG_CYCLE_SAMPLE_DAY;
+    return;
+  }
+
+  if (aggCycLen > 0 && aggCycLen < 28) {
+    infoObj.hormonalSampleType = SHORT_CYCLE_SAMPLE_DAY;
+    collectDate = addDaysToDate(indexLMP, (SHORT_CYCLE_SAMPLE_DAY - MENSES_SHIFT));
+    infoObj.hormonalSampleDate = collectDate;
+    infoObj.hormonalSampleDateStr = collectDate.toLocaleString(dateLocales, dateOptions);
+  } else if (aggCycLen < 31) {
+    infoObj.hormonalSampleType = NORMAL_CYCLE_SAMPLE_DAY;
+    collectDate = addDaysToDate(indexLMP, (NORMAL_CYCLE_SAMPLE_DAY - MENSES_SHIFT));
+    infoObj.hormonalSampleDate = collectDate;
+    infoObj.hormonalSampleDateStr = collectDate.toLocaleString(dateLocales, dateOptions);
+  } else if (aggCycLen < 35) {
+    infoObj.hormonalSampleType = LONG_CYCLE_SAMPLE_DAY;
+    collectDate = addDaysToDate(indexLMP, (LONG_CYCLE_SAMPLE_DAY - MENSES_SHIFT));
+    infoObj.hormonalSampleDate = collectDate;
+    infoObj.hormonalSampleDateStr = collectDate.toLocaleString(dateLocales, dateOptions);
+  } else {
+    infoObj.hormonalSampleType = EXTRA_LONG_CYCLE_SAMPLE_DAY;
+    collectDate = null;
+    infoObj.hormonalSampleDateStr = EXTRA_LONG_CYCLE_SAMPLE_DAY;
+  }
 
   return infoObj;
 }
@@ -299,6 +348,7 @@ function calcMenstrualParameters(dayDiffArr, infoObj) {
   shortestDayToOvulateCalc(dayDiffArr, infoObj);
   averageDayToOvulateCalc(dayDiffArr, infoObj);
   determineOvulationDate(infoObj);
+  hormonalSampleDateCalc(infoObj);
   return infoObj;
 }
 
@@ -348,6 +398,10 @@ function generateTableResults(tbodyDom, infoObj) {
     <tr class="table__row">
       <td class="result-table__desc table__cell" data-label="Ovulated?: "></td>
       <td class="result-table__value table__cell alert-message alert" data-label="Ovulated?: "> ${infoObj.alreadyOvulated}</td>
+    </tr>
+    <tr class="table__row">
+      <td class="result-table__desc table__cell" data-label="Hormonal sample date: "> Day ${infoObj.hormonalSampleType} hormonal sample collection</td>
+      <td class="result-table__value table__cell" data-label="Hormonal sample date: "> ${infoObj.hormonalSampleDateStr}</td>
     </tr>
   `;
   
