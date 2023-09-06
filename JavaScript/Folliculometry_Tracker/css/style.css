@@ -1194,6 +1194,12 @@ a::after {
 	outline-offset: -3px;
 }
 
+.result-table__value--range {
+	font-size: var(--fs-2);
+	line-height: 0.9;
+	text-shadow: var(--dual-theme-grey);
+}
+
 /* Footer */
 .footer {
   width: 100%;
