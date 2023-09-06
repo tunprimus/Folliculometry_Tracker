@@ -121,7 +121,7 @@ function handleDateSubmit() {
       
       curDateLMP = lastItem;
       
-      menstrualInfo.dateLMP = curDateLMP;
+      menstrualInfo.dateLMP = new Date(curDateLMP);
       dateLMPStr = curDateLMP.toLocaleString(dateLocales, dateOptions);
       menstrualInfo.dateLMPStr = curDateLMP.toLocaleString(dateLocales, dateOptions);
       // return curDateLMP, dateLMPStr;
@@ -273,7 +273,7 @@ function averageDayToOvulateCalc(dayDiffArr, infoObj) {
 function determineOvulationDate(infoObj) {
   const todayDate = new Date();
   
-  let currentLMP = infoObj.dateLMP;
+  let currentLMP = new Date(infoObj.dateLMP);
   let avgCycleLen = averageCycleLength;
   
   let currentCycleEndDate = addDaysToDate(currentLMP, (avgCycleLen - MENSES_SHIFT));
@@ -295,12 +295,12 @@ function determineOvulationDate(infoObj) {
   return infoObj;
 }
 
+/* 
 function hormonalSampleDateCalc(infoObj) {
   let collectDate;
   
   let indexLMPStr = infoObj.dateLMPStr;
-  console.log(indexLMPStr);
-  console.log(infoObj.dateLMPStr);
+  
   let aggCycLen = infoObj.averageCycleLength;
   let aggCycEndDate = infoObj.currentCycleEndDate;
   
@@ -336,7 +336,7 @@ function hormonalSampleDateCalc(infoObj) {
 
   return infoObj;
 }
-
+ */
 function calcMenstrualParameters(dayDiffArr, infoObj) {
   if (!Array.isArray(dayDiffArr)) {
     return;
@@ -348,7 +348,7 @@ function calcMenstrualParameters(dayDiffArr, infoObj) {
   shortestDayToOvulateCalc(dayDiffArr, infoObj);
   averageDayToOvulateCalc(dayDiffArr, infoObj);
   determineOvulationDate(infoObj);
-  hormonalSampleDateCalc(infoObj);
+  // hormonalSampleDateCalc(infoObj);
   return infoObj;
 }
 
