@@ -124,8 +124,8 @@ function compareLocalAsc(laterDate, earlierDate) {
 
 function dateSort(bufDateLeft, bufDateRight) {
   if ((dateObjIsValid(bufDateLeft)) && (dateObjIsValid(bufDateRight))) {
-    const dateLeft = bufDateLeft;
-    const dateRight = bufDateRight;
+    const dateLeft = new Date(bufDateLeft)
+    const dateRight = new Date(bufDateRight);
 
     const sign = compareLocalAsc(dateLeft, dateRight);
   }
