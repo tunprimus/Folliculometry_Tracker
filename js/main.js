@@ -16,7 +16,7 @@ const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
 
 let cyclesNum;
-const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', minPredictedOvulationDate: '', minPredictedOvulationDateStr: '', maxPredictedOvulationDate: '', maxPredictedOvulationDateStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '', hormonalSampleDayType: '', hormonalSampleDate: '', hormonalSampleDateStr: '',};
+const menstrualInfo = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', minPredictedOvulationDate: '', minPredictedOvulationDateStr: '', maxPredictedOvulationDate: '', maxPredictedOvulationDateStr: '', ovulationDateRangeStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '', hormonalSampleDayType: '', hormonalSampleDate: '', hormonalSampleDateStr: '',};
 const datesCollectorArray = [];
 let numCyclesGiven;
 let curDateLMP;
@@ -274,6 +274,7 @@ function averageDayToOvulateCalc(dayDiffArr, infoObj) {
 function determineOvulationDate(infoObj) {
   const todayDate = new Date();
   
+  const cycLen = infoObj.numCyclesGiven;
   let currentLMP = new Date(infoObj.dateLMP);
   let avgCycleLen = averageCycleLength;
   let shortCycLen = shortestCycleLength;
@@ -305,6 +306,10 @@ function determineOvulationDate(infoObj) {
   infoObj.minPredictedOvulationDateStr = minPreDate.toLocaleString(dateLocales, dateOptions);
   infoObj.maxPredictedOvulationDate = maxPreDate;
   infoObj.maxPredictedOvulationDateStr = maxPreDate.toLocaleString(dateLocales, dateOptions);
+
+  if (cycLen > 1) {
+    infoObj.ovulationDateRangeStr = `Range:&nbsp; <em>${infoObj.minPredictedOvulationDateStr}</em> &nbsp; to &nbsp; <em>${infoObj.maxPredictedOvulationDateStr}</em>.`;
+  }
   
   return infoObj;
 }
@@ -411,7 +416,7 @@ function generateTableResults(tbodyDom, infoObj) {
     </tr>
     <tr class="table__row">
       <td class="result-table__desc table__cell" data-label="Ovulation Date Range: "></td>
-      <td class="result-table__value table__cell result-table__value--range" data-label="Ovulation Date Range: ">Range from <em>${infoObj.minPredictedOvulationDateStr}</em>  to  <em>${infoObj.maxPredictedOvulationDateStr}</em>.</td>
+      <td class="result-table__value table__cell result-table__value--range" data-label="Ovulation Date Range: ">${infoObj.ovulationDateRangeStr}</td>
     </tr>
     <tr class="table__row">
       <td class="result-table__desc table__cell" data-label="Ovulated?: "></td>
