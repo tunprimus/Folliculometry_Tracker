@@ -10,6 +10,7 @@ const SHORT_CYCLE_SAMPLE_DAY = 19;
 const NORMAL_CYCLE_SAMPLE_DAY = 21;
 const LONG_CYCLE_SAMPLE_DAY = 23;
 const EXTRA_LONG_CYCLE_SAMPLE_DAY = 'Random day collection';
+const EXTRA_LONG_CYCLE_SAMPLE_DAY_TYPE = '> 35';
 // const dateLocales = undefined;
 const dateLocales = undefined || 'en-GB';
 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};
@@ -321,6 +322,7 @@ function hormonalSampleDateCalc(infoObj) {
   }
 
   if (infoObj.alreadyOvulated) {
+    infoObj.hormonalSampleType = EXTRA_LONG_CYCLE_SAMPLE_DAY_TYPE;
     infoObj.hormonalSampleDateStr = EXTRA_LONG_CYCLE_SAMPLE_DAY;
     return;
   }
@@ -341,7 +343,7 @@ function hormonalSampleDateCalc(infoObj) {
     infoObj.hormonalSampleDate = collectDate;
     infoObj.hormonalSampleDateStr = collectDate.toLocaleString(dateLocales, dateOptions);
   } else {
-    infoObj.hormonalSampleType = EXTRA_LONG_CYCLE_SAMPLE_DAY;
+    infoObj.hormonalSampleType = EXTRA_LONG_CYCLE_SAMPLE_DAY_TYPE;
     collectDate = null;
     infoObj.hormonalSampleDateStr = EXTRA_LONG_CYCLE_SAMPLE_DAY;
   }
