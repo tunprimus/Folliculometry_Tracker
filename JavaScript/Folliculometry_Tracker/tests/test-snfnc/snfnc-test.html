@@ -6,14 +6,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test: No Framework, No Config</title>
+  <title>Tests: No Framework, No Config</title>
+  <script type="module" src="../../js/main.js" defer></script>
+  <script type="module" src="snfnc-test.js" defer></script>
   <link rel="stylesheet" href="snfnc-test.css">
-  <script src="../../js/main.js" defer></script>
-  <script src="snfnc-test.js" defer></script>
 </head>
 <body>
   
   <!-- JavaScript Here -->
-  <script></script>
+  <script>
+    it('should select all forms', function() {
+      assertTrue(document.querySelectorAll('form'));
+    })
+  </script>
 </body>
 </html>

@@ -12,7 +12,7 @@
  * @param {function} test_function
  */
 
-function it(description, test_function) {
+export function it(description, test_function) {
   const result = document.createElement('p');
   result.classList.add('test-result');
 
@@ -32,7 +32,7 @@ function it(description, test_function) {
   document.body.appendChild(result);
 }
 
-function assertEqual(expected, actual) {
+export function assertEqual(expected, actual) {
   if (expected === actual || (typeof expected === 'object' && typeof actual === 'object' && expected.length === actual.length && expected.every((element, index) => element === actual[index]))) {
     return;
   } else {
@@ -40,15 +40,15 @@ function assertEqual(expected, actual) {
   }
 }
 
-function assertTrue(value) {
+export function assertTrue(value) {
   assertEqual(value, true);
 }
 
-function assertFalse(value) {
+export function assertFalse(value) {
   assertEqual(value, false);
 }
 
-function assert(isTrue) {
+export function assert(isTrue) {
   if (!isTrue) {
     throw new Error();
   }
