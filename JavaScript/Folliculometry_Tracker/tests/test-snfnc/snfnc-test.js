@@ -3,8 +3,6 @@
   Testing JavaScript without a (third-party) framework +++>>> https://alexwlchan.net/2023/testing-javascript-without-a-framework/
   Unit Test Your JavaScript Code Without a Framework +++>>> https://javascript.plainenglish.io/unit-test-front-end-javascript-code-without-a-framework-8f00c63eb7d4
 */
-
-'use strict';
   
 /**
  * test function
@@ -12,7 +10,7 @@
  * @param {function} test_function
  */
 
-export function it(description, test_function) {
+function it(description, test_function) {
   const result = document.createElement('p');
   result.classList.add('test-result');
 
@@ -29,10 +27,10 @@ export function it(description, test_function) {
     console.error(err);
   }
 
-  document.body.appendChild(result);
+  document.querySelector('#attach-result').appendChild(result);
 }
 
-export function assertEqual(expected, actual) {
+function assertEqual(expected, actual) {
   if (expected === actual || (typeof expected === 'object' && typeof actual === 'object' && expected.length === actual.length && expected.every((element, index) => element === actual[index]))) {
     return;
   } else {
@@ -40,11 +38,11 @@ export function assertEqual(expected, actual) {
   }
 }
 
-export function assertTrue(value) {
+function assertTrue(value) {
   assertEqual(value, true);
 }
 
-export function assertFalse(value) {
+function assertFalse(value) {
   assertEqual(value, false);
 }
 
@@ -55,6 +53,8 @@ export function assert(isTrue) {
 }
 
 /* Demo */
+/* 
 it('should fail', function() {
   assert(1 !== 1);
 });
+ */
