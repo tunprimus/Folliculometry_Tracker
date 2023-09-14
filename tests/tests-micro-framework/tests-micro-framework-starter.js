@@ -3,8 +3,6 @@
   Testing JavaScript without a (third-party) framework +++>>> https://alexwlchan.net/2023/testing-javascript-without-a-framework/
   Unit Test Your JavaScript Code Without a Framework +++>>> https://javascript.plainenglish.io/unit-test-front-end-javascript-code-without-a-framework-8f00c63eb7d4
 */
-
-'use strict';
   
 /**
  * test function
@@ -13,6 +11,7 @@
  */
 
 function it(description, test_function) {
+  const attachResult = document.querySelector('#attach-result');
   const result = document.createElement('p');
   result.classList.add('test-result');
 
@@ -20,12 +19,16 @@ function it(description, test_function) {
     test_function();
     result.classList.add('success');
     result.textContent = description;
+    console.log('\x1b[32m%s\x1b[0m', '\u2714 ' + description);
   } catch (err) {
     result.classList.add('failure');
     result.innerHTML = `${description}<br><pre>${err}</pre>`;
+    console.log('\n');
+    console.log('\x1b[31m%s\x1b[0m', '\u2718 ' + description);
+    console.error(err);
   }
 
-  document.body.appendChild(result);
+  attachResult.appendChild(result);
 }
 
 function assertEqual(expected, actual) {
