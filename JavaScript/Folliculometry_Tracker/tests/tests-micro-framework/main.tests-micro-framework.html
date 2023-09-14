@@ -1,0 +1,47 @@
+<!-- Inspired by:
+  Testing JavaScript without a (third-party) framework +++>>> https://alexwlchan.net/2023/testing-javascript-without-a-framework/
+  Unit Test Your JavaScript Code Without a Framework +++>>> https://javascript.plainenglish.io/unit-test-front-end-javascript-code-without-a-framework-8f00c63eb7d4 -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test: No Framework, No Config</title>
+  <script type="module" src="../../js/main.js"></script>
+  <link rel="stylesheet" href="tests-micro-framework-starter.css">
+  <script src="main.tests-micro-framework.js"></script>
+</head>
+<body>
+  <div class="attach-result" id="attach-result"></div>
+  
+  <!-- JavaScript Here -->
+  <script>
+    /* 
+      Using the Arrange, Act, Assert pattern
+    */
+    const mockArray = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34,];
+    const mockObject = {numCyclesGiven: '', dateLMP: '', dateLMPStr: '', longestCycleLength: '', longestCycleLengthStr: '',shortestCycleLength: '', shortestCycleLengthStr: '', averageCycleLength: '', averageCycleLengthStr: '', longestDayOvulation: '', longestDayOvulationStr: '', shortestDayOvulation: '', shortestDayOvulationStr: '', averageDayOvulation: '', averageDayOvulationStr: '', predictedOvulationDate: '', predictedOvulationDateStr: '', minPredictedOvulationDate: '', minPredictedOvulationDateStr: '', maxPredictedOvulationDate: '', maxPredictedOvulationDateStr: '', ovulationDateRangeStr: '', currentCycleEndDate: '', currentCycleEndDateStr: '', alreadyOvulated: '', hormonalSampleDayType: '', hormonalSampleDate: '', hormonalSampleDateStr: '',};
+    // Testing createDateInputs
+    it('should be true', function() {
+      const cycleNum = 5;
+      createDateInputs();
+    })
+    // Testing handleDateSubmit
+    it('should be true', function() {
+      handleDateSubmit();
+    })
+    // Testing longestCycleLengthCalc
+    it('should be true', function() {
+      longestCycleLengthCalc(mockArray, mockObject);
+    })
+    // Testing shortestCycleLengthCalc
+    it('should be true', function() {
+      shortestCycleLengthCalc(mockArray, mockObject);
+    })
+    // Testing averageCycleLengthCalc
+    it('should be true', function() {
+      averageCycleLengthCalc(mockArray, mockObject);
+    })
+  </script>
+</body>
+</html>
