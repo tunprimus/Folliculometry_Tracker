@@ -54,6 +54,8 @@ function assert(isTrue) {
 }
 
 /* Demo */
+/* 
 it('should fail', function() {
   assert(1 !== 1);
 });
+ */
