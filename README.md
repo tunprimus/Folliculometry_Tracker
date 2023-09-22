@@ -28,7 +28,7 @@ Clone this repo and open the index.html file in the browser or with a live serve
 
 ## Deployed
 
-A live version is also available [here](https://tunprimus.gitlab.io/Folliculometry_Tracker/){:target="_blank"}.
+A live version is also available [here](https://tunprimus.gitlab.io/Folliculometry_Tracker/).
 
 ## Technology & Tools
 
